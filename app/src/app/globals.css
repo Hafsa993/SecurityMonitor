@@ -74,7 +74,6 @@ body {
 
 .profile-card {
   @apply p-6 rounded-lg shadow-lg;
-  background: linear-gradient(to bottom right, rgb(127, 29, 29), rgb(153, 27, 27));
 }
 
 /* Card Styles */
