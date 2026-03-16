@@ -51,16 +51,43 @@ export function generateProfile(enabledPermissions, duration, persona = null) {
     });
 
     let locationDescription = 'Ads for services near your detected locations (restaurants near gym, stores near home). This is happening right now with major apps.';
+    let locationSources = [];
+    
     if (persona?.id === 'max') {
       locationDescription = 'Ads for gaming cafes near campus, protein supplements near gym, coffee shops on your morning route, weekend bars and social spots downtown.';
+      locationSources = [
+        { permissionEmoji: '📍', permissionName: 'Location', insight: 'Gym visits: Mon/Wed/Fri at 6am', adResult: 'Protein supplements & fitness gear ads near gym' },
+      ];
+      if (hasPermission('microphone')) {
+        locationSources.push({ permissionEmoji: '🎤', permissionName: 'Audio', insight: 'Conversations about gaming tournaments & wins', adResult: 'Gaming peripherals & esports event ads' });
+        locationSources.push({ permissionEmoji: '🎤', permissionName: 'Audio', insight: 'Fitness goals & gym discussion', adResult: 'Premium workout and nutrition ads' });
+      }
+      if (hasPermission('notifications')) {
+        locationSources.push({ permissionEmoji: '🔔', permissionName: 'Activity', insight: 'Morning gym session prep (5-6am spike)', adResult: 'Pre-workout ads & gym membership deals at 5am' });
+      }
     } else if (persona?.id === 'sarah') {
       locationDescription = 'Ads for kids clothing stores near school, family restaurants, grocery deals on your shopping route, kids activities venues, suburban stores.';
+      locationSources = [
+        { permissionEmoji: '📍', permissionName: 'Location', insight: 'School drop-off/pickup: 8am & 3pm daily', adResult: 'Kids clothing stores & family restaurants near school' },
+      ];
+      if (hasPermission('microphone')) {
+        locationSources.push({ permissionEmoji: '🎤', permissionName: 'Audio', insight: 'Conversations about kids school & activities', adResult: 'Educational programs & kids sports camps' });
+        locationSources.push({ permissionEmoji: '🎤', permissionName: 'Audio', insight: 'Work stress & family planning talk', adResult: 'Family wellness & stress management services' });
+      }
+      if (hasPermission('notifications')) {
+        locationSources.push({ permissionEmoji: '🔔', permissionName: 'Activity', insight: 'Morning routine 7-8am (kids getting ready)', adResult: 'Quick breakfast & school supply ads at 7:30am' });
+      }
+    } else {
+      locationSources = [
+        { permissionEmoji: '📍', permissionName: 'Location', insight: 'Home & work location detected', adResult: 'Local business & nearby store ads' },
+      ];
     }
 
     scenarios.push({
       icon: '🏠',
       title: 'Targeted Marketing',
       description: locationDescription,
+      sources: locationSources,
     });
 
     scenarios.push({
@@ -106,6 +133,15 @@ export function generateProfile(enabledPermissions, duration, persona = null) {
       icon: '👤',
       title: 'Facial Recognition (Technical Reality)',
       description: cameraDescription,
+      sources: persona?.id === 'max' ? [
+        { permissionEmoji: '📹', permissionName: 'Camera', insight: 'Athletic build in gym/casual college student style', adResult: 'Fitness & athletic brand targeting' },
+        { permissionEmoji: '📹', permissionName: 'Camera', insight: 'Dorm room with gaming setup', adResult: 'Gaming hardware & electronics ads' },
+      ] : persona?.id === 'sarah' ? [
+        { permissionEmoji: '📹', permissionName: 'Camera', insight: 'Professional appearance at work', adResult: 'Workwear & professional services ads' },
+        { permissionEmoji: '📹', permissionName: 'Camera', insight: 'Family home with kids visible', adResult: 'Family-oriented products & parenting services' },
+      ] : [
+        { permissionEmoji: '📹', permissionName: 'Camera', insight: 'Physical appearance & environment', adResult: 'Personalized demographic targeting' },
+      ],
     });
 
     scenarios.push({
@@ -138,19 +174,6 @@ export function generateProfile(enabledPermissions, duration, persona = null) {
     categories.push({
       title: '🎤 Audio & Conversation',
       items: micItems,
-    });
-
-    let micDescription = 'Analyze conversation topics to infer interests, relationship status, health concerns. Several widely used apps have been scrutinized for extensive microphone permissions and surveillance capabilities.';
-    if (persona?.id === 'max') {
-      micDescription = 'They hear conversations about gaming tournaments, fitness goals, college gossip, weekend plans. Infer social circle, interests, and lifestyle.';
-    } else if (persona?.id === 'sarah') {
-      micDescription = 'They hear conversations about kids school, family planning, work stress, health concerns. Infer family dynamics, job satisfaction, and health status.';
-    }
-
-    scenarios.push({
-      icon: '🎯',
-      title: 'Behavioral Targeting',
-      description: micDescription,
     });
 
     scenarios.push({
@@ -196,6 +219,15 @@ export function generateProfile(enabledPermissions, duration, persona = null) {
       icon: '🔐',
       title: 'Security Breach (Actually Happened)',
       description: clipDescription,
+      sources: persona?.id === 'max' ? [
+        { permissionEmoji: '📋', permissionName: 'Clipboard', insight: 'Gaming account passwords & login credentials', adResult: 'Gaming account takeover & fraud targeting' },
+        { permissionEmoji: '📋', permissionName: 'Clipboard', insight: 'College email & campus portal access', adResult: 'Educational credential theft targeting' },
+      ] : persona?.id === 'sarah' ? [
+        { permissionEmoji: '📋', permissionName: 'Clipboard', insight: 'Kids school login information', adResult: 'School account breach targeting parents' },
+        { permissionEmoji: '📋', permissionName: 'Clipboard', insight: 'Family budget notes & account numbers', adResult: 'Financial fraud & identity theft targeting' },
+      ] : [
+        { permissionEmoji: '📋', permissionName: 'Clipboard', insight: 'Sensitive data copied & pasted', adResult: 'Direct credential & financial theft' },
+      ],
     });
 
     scenarios.push({
@@ -232,16 +264,37 @@ export function generateProfile(enabledPermissions, duration, persona = null) {
     });
 
     let contactDescription = 'Popular social media and communication apps use contact uploading to build social graphs. This is standard practice for recommendation algorithms.';
+    let contactSources = [];
+    
     if (persona?.id === 'max') {
       contactDescription = 'They map your college friend network, identify your closest friends, see your social circle strength and diversity.';
+      contactSources = [
+        { permissionEmoji: '👥', permissionName: 'Contacts', insight: 'Close friend group: 5-6 high school friends', adResult: 'Influencer identification in friend group' },
+        { permissionEmoji: '👥', permissionName: 'Contacts', insight: 'Campus contacts: classmates & help desk colleagues', adResult: 'Social network mapping for targeting' },
+      ];
+      if (hasPermission('location')) {
+        contactSources.push({ permissionEmoji: '📍', permissionName: 'Location', insight: 'Gym & library patterns', adResult: 'Social cluster mapping by location' });
+      }
     } else if (persona?.id === 'sarah') {
       contactDescription = 'They identify you as parent, infer family size and ages, map your professional network, and identify parent community connections.';
+      contactSources = [
+        { permissionEmoji: '👥', permissionName: 'Contacts', insight: 'Spouse, kids, extended family', adResult: 'Family status & household composition targeting' },
+        { permissionEmoji: '👥', permissionName: 'Contacts', insight: 'Parent network: school contacts & other parents', adResult: 'Parent community cluster targeting' },
+      ];
+      if (hasPermission('location')) {
+        contactSources.push({ permissionEmoji: '📍', permissionName: 'Location', insight: 'School pickup location with other parents', adResult: 'Parent group ads & family event targeting' });
+      }
+    } else {
+      contactSources = [
+        { permissionEmoji: '👥', permissionName: 'Contacts', insight: 'Your entire contact network', adResult: 'Social graph mapping & influence targeting' },
+      ];
     }
 
     scenarios.push({
       icon: '🕸️',
       title: 'Social Graph Analysis (Widely Used)',
       description: contactDescription,
+      sources: contactSources,
     });
 
     scenarios.push({
@@ -279,16 +332,35 @@ export function generateProfile(enabledPermissions, duration, persona = null) {
     });
 
     let notifDescription = 'All major apps track engagement and optimize push notification timing. This is standard for engagement metrics and A/B testing.';
+    let notifSources = [];
+    
     if (persona?.id === 'max') {
       notifDescription = 'They know you game at night, work out at dawn, socialize weekends. Target gaming deals at midnight, gym motivation at 5am, party invites on Friday nights.';
+      notifSources = [
+        { permissionEmoji: '🔔', permissionName: 'Activity', insight: 'Late night activity spike: 10pm-2am', adResult: 'Gaming deals pushed at midnight' },
+        { permissionEmoji: '🔔', permissionName: 'Activity', insight: 'Morning gym session prep: 5-6am', adResult: 'Gym motivation ads at 5am, fitness deals' },
+      ];
+      if (hasPermission('location')) {
+        notifSources.push({ permissionEmoji: '📍', permissionName: 'Location', insight: 'Downtown on Saturday nights', adResult: 'Social event & bar ads on Friday nights' });
+      }
     } else if (persona?.id === 'sarah') {
       notifDescription = 'They know your morning rush, work unavailability, evening family time. Target kid activities at school pickup time, work stress relief at 5pm, family deals at dinnertime.';
+      notifSources = [
+        { permissionEmoji: '🔔', permissionName: 'Activity', insight: 'Morning rush: 7-8am (kids getting ready)', adResult: 'Quick breakfast & school supplies at 7:30am' },
+        { permissionEmoji: '🔔', permissionName: 'Activity', insight: 'Lower responsiveness during work (9-5)', adResult: 'Work-related ads avoided, evening targeting instead' },
+        { permissionEmoji: '🔔', permissionName: 'Activity', insight: 'Evening family time: 6-9pm engagement', adResult: 'Family deals, dinner services at 6pm exactly' },
+      ];
+    } else {
+      notifSources = [
+        { permissionEmoji: '🔔', permissionName: 'Activity', insight: 'Active hours & usage patterns detected', adResult: 'Timing-optimized push notifications & ads' },
+      ];
     }
 
     scenarios.push({
       icon: '⏰',
       title: 'Behavior Analysis (Standard Practice)',
       description: notifDescription,
+      sources: notifSources,
     });
 
     scenarios.push({

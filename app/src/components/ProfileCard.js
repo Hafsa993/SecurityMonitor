@@ -1,6 +1,18 @@
 'use client';
 
+import { useState } from 'react';
+import SourcesBreakdown from './SourcesBreakdown';
+
 export default function ProfileCard({ profile, permissions }) {
+  const [openCategories, setOpenCategories] = useState({});
+
+  const toggleCategory = (idx) => {
+    setOpenCategories(prev => ({
+      ...prev,
+      [idx]: !prev[idx]
+    }));
+  };
+
   const getInvasionBadgeColor = (level) => {
     if (level === 'Low') return 'bg-green-900 text-green-200';
     if (level === 'Moderate') return 'bg-yellow-900 text-yellow-200';
@@ -35,16 +47,29 @@ export default function ProfileCard({ profile, permissions }) {
       {/* Detailed Breakdown */}
       <div className="grid md:grid-cols-2 gap-6">
         {profile.categories.map((category, idx) => (
-          <div key={idx} className="bg-slate-700 rounded-lg p-6">
-            <h3 className="text-lg font-semibold mb-3 text-orange-300">{category.title}</h3>
-            <ul className="space-y-2">
-              {category.items.map((item, itemIdx) => (
-                <li key={itemIdx} className="flex items-start gap-2">
-                  <span className="text-orange-400 flex-shrink-0 mt-1">→</span>
-                  <span className="text-slate-200">{item}</span>
-                </li>
-              ))}
-            </ul>
+          <div key={idx} className="bg-slate-700 rounded-lg overflow-hidden">
+            <button
+              onClick={() => toggleCategory(idx)}
+              className="w-full text-left p-6 hover:bg-slate-600 transition-colors flex items-center justify-between"
+            >
+              <h3 className="text-lg font-semibold text-orange-300">{category.title}</h3>
+              <span className="text-orange-300 text-xl flex-shrink-0">
+                {openCategories[idx] ? '▼' : '▶'}
+              </span>
+            </button>
+            
+            {openCategories[idx] && (
+              <div className="px-6 pb-6 border-t border-slate-600 bg-slate-800 bg-opacity-50">
+                <ul className="space-y-2">
+                  {category.items.map((item, itemIdx) => (
+                    <li key={itemIdx} className="flex items-start gap-2">
+                      <span className="text-orange-400 flex-shrink-0 mt-1">→</span>
+                      <span className="text-slate-200 text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -60,14 +85,17 @@ export default function ProfileCard({ profile, permissions }) {
       {/* Scenarios */}
       <div className="bg-slate-700 rounded-lg p-6">
         <h3 className="text-lg font-semibold mb-4 text-orange-300">What They Could Do With This Data</h3>
-        <ul className="space-y-3">
+        <ul className="space-y-4">
           {profile.scenarios.map((scenario, idx) => (
-            <li key={idx} className="flex items-start gap-3">
-              <span className="text-xl flex-shrink-0 mt-0.5">{scenario.icon}</span>
-              <div>
-                <div className="font-semibold text-slate-200">{scenario.title}</div>
-                <div className="text-slate-400 text-sm">{scenario.description}</div>
+            <li key={idx} className="border border-slate-600 rounded-lg p-4">
+              <div className="flex items-start gap-3 mb-2">
+                <span className="text-xl flex-shrink-0 mt-0.5">{scenario.icon}</span>
+                <div className="flex-1">
+                  <div className="font-semibold text-slate-200">{scenario.title}</div>
+                  <div className="text-slate-400 text-sm">{scenario.description}</div>
+                </div>
               </div>
+              {scenario.sources && <SourcesBreakdown sources={scenario.sources} />}
             </li>
           ))}
         </ul>
