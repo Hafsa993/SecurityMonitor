@@ -16,7 +16,7 @@ export default function ProfileCard({ profile, permissions }) {
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-3xl font-bold mb-2">Data Profile Summary</h2>
-            <p className="text-lg opacity-90">After {profile.duration} days of tracking</p>
+            <p className="text-lg opacity-90">After {profile.duration} of tracking</p>
           </div>
           <div className="text-right">
             <div className={`text-4xl font-bold ${

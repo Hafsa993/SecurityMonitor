@@ -94,7 +94,7 @@ export function generateProfile(enabledPermissions, duration) {
     scenarios.push({
       icon: '🎯',
       title: 'Behavioral Targeting',
-      description: 'Analyze conversation topics to infer interests, relationship status, health concerns. TikTok and other apps have been caught accessing microphone without explicit use.',
+      description: 'Analyze conversation topics to infer interests, relationship status, health concerns. Several widely used apps have been scrutinized for extensive microphone permissions and surveillance capabilities.',
     });
 
     scenarios.push({
@@ -121,7 +121,7 @@ export function generateProfile(enabledPermissions, duration) {
     scenarios.push({
       icon: '🔐',
       title: 'Security Breach (Actually Happened)',
-      description: 'This is real. Over 100 popular apps were caught reading clipboard data. TikTok, LinkedIn, Snapchat, and others collected everything you copy-paste.',
+      description: 'This is real. Over 100 popular apps were caught reading clipboard data. Many widely used social media and communication platforms collected everything users copy-paste.',
     });
 
     scenarios.push({
@@ -148,7 +148,7 @@ export function generateProfile(enabledPermissions, duration) {
     scenarios.push({
       icon: '🕸️',
       title: 'Social Graph Analysis (Widely Used)',
-      description: 'Apps like Snapchat, WhatsApp, and dating apps use contact uploading to build social graphs. This is standard practice for recommendation algorithms.',
+      description: 'Popular social media and communication apps use contact uploading to build social graphs. This is standard practice for recommendation algorithms.',
     });
 
     scenarios.push({
