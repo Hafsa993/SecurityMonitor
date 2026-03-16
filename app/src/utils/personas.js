@@ -1,0 +1,103 @@
+export const PERSONAS = {
+  anonymous: {
+    id: 'anonymous',
+    name: 'Anonymous',
+    type: 'generic',
+    description: 'Generic profile without specific habits',
+  },
+  max: {
+    id: 'max',
+    name: 'Max',
+    age: 22,
+    type: 'College Student',
+    emoji: '🎓',
+    description: 'See what a website knows about a college student',
+    interests: ['fitness', 'gaming', 'tech', 'coffee'],
+    routine: {
+      home: 'Dorm on south campus',
+      work: 'Part-time IT help desk (on campus)',
+      frequentPlaces: [
+        { place: 'Gym', times: 'Mon/Wed/Fri 6am', details: 'Fitness routine 3x/week' },
+        { place: 'Campus library', times: 'Daily 10am-4pm', details: 'Study sessions' },
+        { place: 'Downtown area', times: 'Saturdays nights', details: 'Social outings' },
+        { place: 'Coffee shop near campus', times: 'Morning before class', details: 'Daily ritual' },
+      ],
+    },
+    relationships: 'Close with 5-6 friends from high school, loose connection with family',
+    behaviors: [
+      'Gaming sessions at night',
+      'Coffee dependent',
+      'Active on Reddit and gaming communities',
+      'Fitness-focused lifestyle',
+      'Regular social activities on weekends',
+    ],
+    inferences: {
+      location: 'Student lifestyle, fitness-conscious, regular schedule, weeknight gamer',
+      camera: 'Casual dresser, athletic build, college-age appearance',
+      microphone: 'Conversations about gaming, classes, and social lives',
+      clipboard: 'Gaming accounts, passwords, college email, social media access',
+      contacts: 'Friend group appears to be college peers, limited family contact',
+      notifications: 'Active evenings and weekends, less responsive weekday mornings',
+    },
+    ads: [
+      'Gaming laptop deals',
+      'Protein powder & supplements',
+      'Budget gym memberships',
+      'Dating apps for college students',
+      'Coffee subscription services',
+      'Tech gadgets and accessories',
+    ],
+  },
+  sarah: {
+    id: 'sarah',
+    name: 'Sarah',
+    age: 35,
+    type: 'Parent',
+    emoji: '👩‍👧',
+    description: 'See what a website knows about a parent',
+    interests: ['family', 'wellness', 'home', 'kids activities', 'budget shopping'],
+    routine: {
+      home: 'Suburban home with family',
+      work: 'Corporate office (9-5)',
+      frequentPlaces: [
+        { place: 'Home', times: 'Evenings & weekends', details: 'Family time' },
+        { place: 'Office', times: 'Mon-Fri 9am-5pm', details: 'Work commute' },
+        { place: 'Elementary school', times: 'Drop-off 8am, pickup 3pm', details: "Kids' school routine" },
+        { place: 'Grocery store', times: 'Weekly shopping', details: 'Family groceries' },
+        { place: 'Shopping centers', times: 'Weekends', details: 'Family errands' },
+        { place: 'Kid activities', times: 'Weekends', details: 'Soccer, dance, etc.' },
+      ],
+    },
+    relationships: 'Married, 2 kids, regular family calls, work colleagues',
+    behaviors: [
+      'Morning commute routine',
+      'School pickup/dropoff schedule',
+      'Weekend family activities',
+      'Budget-conscious shopping',
+      'Evening family time',
+      'Planning and scheduling',
+    ],
+    inferences: {
+      location: 'Parent with regular responsibilities, predictable schedule, suburban lifestyle',
+      camera: 'Professional appearance at work, casual at home, family photos with kids',
+      microphone: 'Conversations about kids, work, family plans, school events',
+      clipboard: 'Kids school logins, family calendar notes, budget tracking, kid app passwords',
+      contacts: 'Spouse, kids, extended family, parent friends, school contacts',
+      notifications: 'Active during school hours and evenings, less during work meetings',
+    },
+    ads: [
+      'Kids clothing and gear',
+      'Family vacation packages',
+      'Budget grocery deals',
+      'School supplies',
+      'Kids activities and sports',
+      'Family wellness programs',
+      'Home improvement',
+      'Family insurance services',
+    ],
+  },
+};
+
+export function getPersona(personaId) {
+  return PERSONAS[personaId] || PERSONAS.anonymous;
+}
