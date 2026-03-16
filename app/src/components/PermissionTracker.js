@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react';
 import PermissionToggle from './PermissionToggle';
 import ProfileCard from './ProfileCard';
 import DurationSlider from './DurationSlider';
+import PersonaSelector from './PersonaSelector';
 import { generateProfile } from '@/utils/profileGenerator';
+import { PERSONAS } from '@/utils/personas';
 
 const PERMISSIONS = [
   {
@@ -48,15 +50,17 @@ const PERMISSIONS = [
 export default function PermissionTracker() {
   const [permissions, setPermissions] = useState({});
   const [duration, setDuration] = useState(7); // days
+  const [selectedPersona, setSelectedPersona] = useState('anonymous');
   const [profile, setProfile] = useState(null);
 
-  // Initialize permissions from localStorage
+  // Initialize permissions and persona from localStorage
   useEffect(() => {
     const savedState = localStorage.getItem('permissionTrackerState');
     if (savedState) {
-      const { permissions: savedPermissions, duration: savedDuration } = JSON.parse(savedState);
+      const { permissions: savedPermissions, duration: savedDuration, selectedPersona: savedPersona } = JSON.parse(savedState);
       setPermissions(savedPermissions);
       setDuration(savedDuration);
+      if (savedPersona) setSelectedPersona(savedPersona);
     } else {
       const initialPermissions = {};
       PERMISSIONS.forEach((p) => {
@@ -66,21 +70,22 @@ export default function PermissionTracker() {
     }
   }, []);
 
-  // Update profile when permissions or duration changes
+  // Update profile when permissions, duration, or persona changes
   useEffect(() => {
     const enabledPermissions = Object.keys(permissions)
       .filter((key) => permissions[key])
       .map((key) => PERMISSIONS.find((p) => p.id === key));
 
-    const newProfile = generateProfile(enabledPermissions, duration);
+    const currentPersona = PERSONAS[selectedPersona];
+    const newProfile = generateProfile(enabledPermissions, duration, currentPersona);
     setProfile(newProfile);
 
     // Save state to localStorage
     localStorage.setItem(
       'permissionTrackerState',
-      JSON.stringify({ permissions, duration })
+      JSON.stringify({ permissions, duration, selectedPersona })
     );
-  }, [permissions, duration]);
+  }, [permissions, duration, selectedPersona]);
 
   const togglePermission = (id) => {
     setPermissions((prev) => ({
@@ -96,6 +101,12 @@ export default function PermissionTracker() {
       {/* Controls */}
       <div className="lg:col-span-1">
         <div className="sticky top-6 space-y-6">
+          {/* Persona Selector */}
+          <PersonaSelector 
+            selectedPersona={selectedPersona} 
+            onPersonaChange={setSelectedPersona}
+          />
+
           {/* Duration Slider */}
           <DurationSlider value={duration} onChange={setDuration} />
 
