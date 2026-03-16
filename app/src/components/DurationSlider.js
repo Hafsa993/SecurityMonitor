@@ -23,20 +23,20 @@ export default function DurationSlider({ value, onChange }) {
   };
 
   const getInvasionColor = (days) => {
-    if (days <= 1) return 'text-green-400';
-    if (days <= 7) return 'text-yellow-400';
-    if (days <= 30) return 'text-orange-400';
-    if (days <= 90) return 'text-red-400';
-    return 'text-red-600';
+    if (days <= 1) return 'invasion-display-low';
+    if (days <= 7) return 'invasion-display-moderate';
+    if (days <= 30) return 'invasion-display-high';
+    if (days <= 90) return 'invasion-display-veryHigh';
+    return 'invasion-display-extreme';
   };
 
   return (
-    <div className="bg-slate-700 rounded-lg p-6">
-      <h2 className="text-xl font-semibold mb-4 text-orange-300">Tracking Duration</h2>
+    <div className="card-bg rounded-lg p-6">
+      <h2 className="heading-accent mb-4">Tracking Duration</h2>
       <div className="space-y-4">
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-white font-medium">{getDurationLabel(value)}</span>
+            <span className="text-primary font-medium">{getDurationLabel(value)}</span>
             <span className={`font-semibold ${getInvasionColor(value)}`}>
               {getInvasionLevel(value)} Risk
             </span>
@@ -47,9 +47,13 @@ export default function DurationSlider({ value, onChange }) {
             max="365"
             value={value}
             onChange={(e) => onChange(Number(e.target.value))}
-            className="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-orange-500"
+            className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+            style={{
+              backgroundColor: 'var(--color-bg-secondary)',
+              accentColor: 'var(--color-accent)'
+            }}
           />
-          <div className="flex justify-between text-xs text-slate-400 mt-2">
+          <div className="flex justify-between text-xs text-secondary mt-2">
             <span>1 day</span>
             <span>365 days</span>
           </div>
@@ -63,8 +67,8 @@ export default function DurationSlider({ value, onChange }) {
               onClick={() => onChange(opt.value)}
               className={`py-2 px-2 rounded text-sm font-medium transition-colors ${
                 value === opt.value
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-slate-600 text-slate-300 hover:bg-slate-500'
+                  ? 'btn-primary'
+                  : 'btn-secondary'
               }`}
             >
               {opt.label}

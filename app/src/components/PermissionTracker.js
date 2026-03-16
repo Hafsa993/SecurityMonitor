@@ -111,8 +111,8 @@ export default function PermissionTracker() {
           <DurationSlider value={duration} onChange={setDuration} />
 
           {/* Permissions */}
-          <div className="bg-slate-700 rounded-lg p-6">
-            <h2 className="text-xl font-semibold mb-4 text-orange-300">
+          <div className="card-bg rounded-lg p-6">
+            <h2 className="heading-accent mb-4">
               Permissions ({enabledCount}/{PERMISSIONS.length})
             </h2>
             <div className="space-y-3">
@@ -134,10 +134,10 @@ export default function PermissionTracker() {
         {profile && <ProfileCard profile={profile} permissions={permissions} />}
 
         {enabledCount === 0 && (
-          <div className="bg-slate-700 rounded-lg p-12 text-center">
+          <div className="card-bg rounded-lg p-12 text-center">
             <p className="text-2xl mb-4">🛡️</p>
-            <p className="text-xl font-semibold text-slate-300 mb-2">No Permissions Enabled</p>
-            <p className="text-slate-400">
+            <p className="text-xl font-semibold text-primary mb-2">No Permissions Enabled</p>
+            <p className="text-secondary">
               Toggle some permissions above to see what a website could know about you
             </p>
           </div>
