@@ -423,7 +423,7 @@ export function generateProfile(enabledPermissions, duration, persona = null) {
     scenarios.push({
       icon: '📊',
       title: 'Data Aggregation',
-      description: 'Combine your enabled permissions to build a comprehensive profile for monetization',
+      description: 'Combine previously known data for a comprehensive profile for monetization',
     });
   }
 
