@@ -1,0 +1,204 @@
+import { PERMISSION_CONFIGS } from './permissionConfigs.js';
+import { getPersonaData } from './personaConfigs.js';
+
+// Option 3: Component-based approach - utility functions for building permission sections
+
+export function buildLocationSection(hasPermission, personaId) {
+  const config = PERMISSION_CONFIGS.location;
+  const items = [...config.baseItems];
+  let sources = [];
+  let description = config.scenarios[0].baseDescription;
+
+  const personaData = getPersonaData(personaId);
+
+  if (personaData?.location) {
+    items.push(...personaData.location.extraItems);
+    description = personaData.location.description;
+    sources = [...personaData.location.baseSources];
+
+    if (hasPermission('microphone')) {
+      sources.push(...personaData.location.microphone);
+    }
+    if (hasPermission('notifications')) {
+      sources.push(...personaData.location.notifications);
+    }
+  } else {
+    sources = [
+      {
+        permissionEmoji: '📍',
+        permissionName: 'Location',
+        insight: 'Home & work location detected',
+        adResult: 'Local business & nearby store ads',
+      },
+    ];
+  }
+
+  return {
+    category: { title: config.categoryTitle, items },
+    scenarios: [
+      { icon: '🏠', title: 'Targeted Marketing', description, sources },
+      config.scenarios[1], // Legal Reality
+    ],
+  };
+}
+
+export function buildCameraSection(personaId) {
+  const config = PERMISSION_CONFIGS.camera;
+  const items = [...config.baseItems];
+  let description = config.scenarios[0].baseDescription;
+  let sources = [];
+
+  const personaData = getPersonaData(personaId);
+
+  if (personaData?.camera) {
+    items.push(...personaData.camera.items);
+    description = personaData.camera.description;
+    sources = personaData.camera.sources;
+  } else {
+    sources = [
+      {
+        permissionEmoji: '📹',
+        permissionName: 'Camera',
+        insight: 'Physical appearance & environment',
+        adResult: 'Personalized demographic targeting',
+      },
+    ];
+  }
+
+  return {
+    category: { title: config.categoryTitle, items },
+    scenarios: [
+      { icon: '👤', title: 'Facial Recognition (Technical Reality)', description, sources },
+      config.scenarios[1], // Legal Reality
+    ],
+  };
+}
+
+export function buildMicrophoneSection(personaId) {
+  const config = PERMISSION_CONFIGS.microphone;
+  const items = [...config.baseItems];
+
+  const personaData = getPersonaData(personaId);
+
+  if (personaData?.location?.microphone && !personaId) {
+    // Only for personas, we add extra items during location processing
+  } else {
+    // Add default persona items
+    if (personaId === 'max') {
+      items.push('Conversations about gaming, classes, and friends');
+      items.push('Hangout noise: cafes, dorms, gym');
+    } else if (personaId === 'sarah') {
+      items.push('Conversations about kids, work meetings, family plans');
+      items.push('Background sounds: school pickup, office, home with kids');
+    }
+  }
+
+  return {
+    category: { title: config.categoryTitle, items },
+    scenarios: [config.scenarios[0]], // Legal Reality
+  };
+}
+
+export function buildClipboardSection(personaId) {
+  const config = PERMISSION_CONFIGS.clipboard;
+  const items = [...config.baseItems];
+  let description = config.scenarios[0].baseDescription;
+  let sources = [];
+
+  const personaData = getPersonaData(personaId);
+
+  if (personaData?.clipboard) {
+    items.push(...personaData.clipboard.items);
+    description = personaData.clipboard.description;
+    sources = personaData.clipboard.sources;
+  } else {
+    sources = [
+      {
+        permissionEmoji: '📋',
+        permissionName: 'Clipboard',
+        insight: 'Sensitive data copied & pasted',
+        adResult: 'Direct credential & financial theft',
+      },
+    ];
+  }
+
+  return {
+    category: { title: config.categoryTitle, items },
+    scenarios: [
+      { icon: '🔐', title: 'Security Breach (Actually Happened)', description, sources },
+      config.scenarios[1], // Legal Reality & Changes
+    ],
+  };
+}
+
+export function buildContactsSection(hasPermission, personaId) {
+  const config = PERMISSION_CONFIGS.contacts;
+  const items = [...config.baseItems];
+  let description = config.scenarios[0].baseDescription;
+  let sources = [];
+
+  const personaData = getPersonaData(personaId);
+
+  if (personaData?.contacts) {
+    items.push(...personaData.contacts.items);
+    description = personaData.contacts.description;
+    sources = [...personaData.contacts.sources];
+
+    if (hasPermission('location') && personaData.contacts.locationExtra) {
+      sources.push(personaData.contacts.locationExtra);
+    }
+  } else {
+    sources = [
+      {
+        permissionEmoji: '👥',
+        permissionName: 'Contacts',
+        insight: 'Your entire contact network',
+        adResult: 'Social graph mapping & influence targeting',
+      },
+    ];
+  }
+
+  return {
+    category: { title: config.categoryTitle, items },
+    scenarios: [
+      { icon: '🕸️', title: 'Social Graph Analysis (Widely Used)', description, sources },
+      config.scenarios[1], // Legal Reality
+    ],
+  };
+}
+
+export function buildNotificationsSection(hasPermission, personaId) {
+  const config = PERMISSION_CONFIGS.notifications;
+  const items = [...config.baseItems];
+  let description = config.scenarios[0].baseDescription;
+  let sources = [];
+
+  const personaData = getPersonaData(personaId);
+
+  if (personaData?.notifications) {
+    items.push(...personaData.notifications.extraItems);
+    description = personaData.notifications.description;
+    sources = [...personaData.notifications.sources];
+
+    if (hasPermission('location') && personaData.notifications.locationExtra) {
+      sources.push(personaData.notifications.locationExtra);
+    }
+  } else {
+    sources = [
+      {
+        permissionEmoji: '🔔',
+        permissionName: 'Activity',
+        insight: 'Active hours & usage patterns detected',
+        adResult: 'Timing-optimized push notifications & ads',
+      },
+    ];
+  }
+
+  return {
+    category: { title: config.categoryTitle, items },
+    scenarios: [
+      { icon: '⏰', title: 'Behavior Analysis (Standard Practice)', description, sources },
+      config.scenarios[1], // Legal Reality
+    ],
+  };
+}
