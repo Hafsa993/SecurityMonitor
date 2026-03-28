@@ -75,15 +75,7 @@ export default function ProfileCard({ profile, permissions }) {
           </div>
         ))}
       </div>
-
-      {/* Permission Combo Warning */}
-      {profile.comboWarning && (
-        <div className="warning-box rounded-lg p-6">
-          <h3 className="text-lg font-semibold warning-heading mb-3">⚠️ Permission Combination Risk</h3>
-          <p className="warning-text">{profile.comboWarning}</p>
-        </div>
-      )}
-
+       
       {/* Scenarios */}
       <div className="card-bg rounded-lg p-6">
         <h3 className="heading-accent mb-4">What They Could Do With This Data</h3>
