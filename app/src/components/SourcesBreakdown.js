@@ -14,7 +14,7 @@ export default function SourcesBreakdown({ sources }) {
         className="flex items-center gap-2 text-sm font-medium text-accent-light hover:text-accent transition-colors"
       >
         <span>{isOpen ? '▼' : '▶'}</span>
-        <span>? How they know this ({sources.length} data points)</span>
+        <span>? How they know this</span>
       </button>
 
       {isOpen && (
