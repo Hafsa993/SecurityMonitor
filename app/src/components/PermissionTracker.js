@@ -48,7 +48,14 @@ const PERMISSIONS = [
 ];
 
 export default function PermissionTracker() {
-  const [permissions, setPermissions] = useState({});
+  const [permissions, setPermissions] = useState({
+    location: false,
+    camera: false,
+    microphone: false,
+    clipboard: false,
+    contacts: false,
+    notifications: false,
+  });
   const [duration, setDuration] = useState(7); // days
   const [selectedPersona, setSelectedPersona] = useState('anonymous');
   const [profile, setProfile] = useState(null);

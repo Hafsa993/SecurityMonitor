@@ -39,7 +39,7 @@ export const PERMISSION_CONFIGS = {
         icon: '👤',
         title: 'Facial Recognition (Technical Reality)',
         baseDescription:
-          'Technically possible with modern AI, but most mainstream apps don\'t do this yet. Governments and tech companies (Meta, Google) actually do this at scale.',
+          'Technically possible with modern AI, but most mainstream apps don\'t do this yet. Governments and tech companies actually do this at scale.',
       },
       {
         icon: '⚖️',
