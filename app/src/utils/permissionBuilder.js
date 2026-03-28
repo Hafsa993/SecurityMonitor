@@ -77,25 +77,36 @@ export function buildCameraSection(personaId) {
 export function buildMicrophoneSection(personaId) {
   const config = PERMISSION_CONFIGS.microphone;
   const items = [...config.baseItems];
+  let description = config.scenarios[0].baseDescription;
+  let sources = [];
 
   const personaData = getPersonaData(personaId);
 
-  if (personaData?.location?.microphone && !personaId) {
-    // Only for personas, we add extra items during location processing
-  } else {
-    // Add default persona items
-    if (personaId === 'max') {
-      items.push('Conversations about gaming, classes, and friends');
-      items.push('Hangout noise: cafes, dorms, gym');
-    } else if (personaId === 'sarah') {
-      items.push('Conversations about kids, work meetings, family plans');
-      items.push('Background sounds: school pickup, office, home with kids');
+  if (personaData?.microphone) {
+    // this is an array, so treat it as sources directly
+    if (Array.isArray(personaData.microphone)) {
+      sources = personaData.microphone;
+    } else if (personaData.microphone.sources) {
+      sources = personaData.microphone.sources;
+      description = personaData.microphone.description;
     }
+  } else {
+    sources = [
+      {
+        permissionEmoji: '🎤',
+        permissionName: 'Microphone',
+        insight: 'Conversations detected and analyzed',
+        adResult: 'Interest-based app & ad targeting',
+      },
+    ];
   }
 
   return {
     category: { title: config.categoryTitle, items },
-    scenarios: [config.scenarios[0]], // Legal Reality
+    scenarios: [
+      { icon: '🎙️', title: 'Conversation Monitoring (Technically Possible)', description, sources },
+      config.scenarios[1], // Legal Reality
+    ],
   };
 }
 

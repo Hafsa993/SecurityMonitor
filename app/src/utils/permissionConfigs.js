@@ -61,6 +61,11 @@ export const PERMISSION_CONFIGS = {
     categoryTitle: '🎤 Audio & Conversation',
     scenarios: [
       {
+        icon: '🎙️',
+        title: 'Conversation Monitoring (Technically Possible)',
+        baseDescription:
+            'With microphone access, apps can listen to nearby conversations and understand what you\'re talking about. This could be used to profile your interests, infer your mood and stress levels, or target you with relevant apps and ads based on conversation topics. Technically possible but varies by app intent and capability.',
+        },{
         icon: '⚖️',
         title: 'Legal Reality',
         description:
