@@ -14,81 +14,106 @@ body {
     sans-serif;
 }
 
-/* Color Variables */
+/* Color Variables - Option 1: Modern Gradient Dark Theme with Purple Accent */
 :root {
-  /* Primary Colors */
-  --color-accent: rgb(249, 115, 22); /* orange-500 */
-  --color-accent-light: rgb(253, 160, 75); /* orange-400 */
-  --color-accent-lighter: rgb(254, 215, 170); /* orange-300 */
+  /* Primary Colors - Purple Accent */
+  --color-accent: rgb(124, 92, 255); /* purple-600 */
+  --color-accent-light: rgb(167, 139, 250); /* purple-400 */
+  --color-accent-lighter: rgb(196, 181, 253); /* purple-300 */
 
-  /* Background Colors */
-  --color-bg-primary: rgb(55, 65, 81); /* slate-700 */
-  --color-bg-secondary: rgb(71, 85, 105); /* slate-600 */
-  --color-bg-hover: rgb(51, 65, 85); /* slate-500 */
+  /* Secondary Colors - Cyan */
+  --color-secondary: rgb(0, 217, 255); /* cyan-400 */
+  --color-secondary-light: rgb(34, 211, 238); /* sky-400 */
+
+  /* Background Colors - Enhanced Gradients */
+  --color-bg-primary: rgb(30, 41, 59); /* slate-900 */
+  --color-bg-secondary: rgb(51, 65, 85); /* slate-800 */
+  --color-bg-hover: rgb(71, 85, 105); /* slate-700 with gradient effect */
 
   /* Text Colors */
   --color-text-primary: rgb(241, 245, 249); /* slate-100 */
   --color-text-secondary: rgb(203, 213, 225); /* slate-400 */
-  --color-text-accent: rgb(254, 215, 170); /* orange-300 */
+  --color-text-accent: rgb(196, 181, 253); /* purple-300 */
 
-  /* Status Colors */
+  /* Status Colors - Enhanced Contrast */
   --color-risk-extreme: rgb(127, 29, 29); /* red-950 */
-  --color-risk-veryHigh: rgb(127, 29, 29); /* red-900 */
-  --color-risk-high: rgb(120, 53, 15); /* orange-900 */
-  --color-risk-moderate: rgb(113, 63, 18); /* yellow-900 */
-  --color-risk-low: rgb(20, 83, 11); /* green-900 */
+  --color-risk-veryHigh: rgb(153, 27, 27); /* red-900 */
+  --color-risk-high: rgb(220, 38, 38); /* red-600 */
+  --color-risk-moderate: rgb(245, 158, 11); /* amber-500 */
+  --color-risk-low: rgb(34, 197, 94); /* green-500 */
 
-  /* Status Text Colors */
+  /* Status Text Colors - Improved Contrast */
   --color-text-extreme: rgb(254, 226, 226); /* red-100 */
   --color-text-veryHigh: rgb(254, 202, 202); /* red-200 */
-  --color-text-high: rgb(253, 186, 116); /* orange-200 */
-  --color-text-moderate: rgb(254, 243, 199); /* yellow-200 */
+  --color-text-high: rgb(254, 243, 199); /* yellow-200 */
+  --color-text-moderate: rgb(254, 243, 199); /* amber-200 */
   --color-text-low: rgb(187, 247, 208); /* green-200 */
 
-  /* Level Display Text */
+  /* Level Display Text - Vibrant for visibility */
   --color-display-extreme: rgb(252, 165, 165); /* red-300 */
-  --color-display-veryHigh: rgb(251, 146, 60); /* orange-300 */
-  --color-display-high: rgb(250, 204, 21); /* yellow-300 */
+  --color-display-veryHigh: rgb(248, 113, 113); /* red-400 */
+  --color-display-high: rgb(251, 146, 60); /* orange-400 */
+  --color-display-moderate: rgb(250, 204, 21); /* yellow-300 */
   --color-display-low: rgb(134, 239, 172); /* green-300 */
 
   /* Border Colors */
-  --color-border: rgb(64, 82, 110); /* slate-600 */
-  --color-border-accent: rgb(249, 115, 22); /* orange-500 */
+  --color-border: rgb(71, 85, 105); /* slate-700 */
+  --color-border-accent: rgb(124, 92, 255); /* purple-600 */
   --color-border-warning: rgb(220, 38, 38); /* red-600 */
+
+  /* Transitions */
+  --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Base Classes */
 .permission-toggle {
-  @apply flex items-center justify-between p-4 rounded-lg transition-colors cursor-pointer;
+  @apply flex items-center justify-between p-4 rounded-lg cursor-pointer;
   background-color: var(--color-bg-secondary);
+  transition: var(--transition-base);
+  border: 1px solid transparent;
 }
 
 .permission-toggle:hover {
   background-color: var(--color-bg-hover);
+  border-color: var(--color-accent);
+}
+
+.permission-toggle:focus-within {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .slider-container {
   @apply mt-6 p-4 rounded-lg;
-  background-color: var(--color-bg-primary);
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  transition: var(--transition-base);
 }
 
 .profile-card {
   @apply p-6 rounded-lg shadow-lg;
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  transition: var(--transition-slow);
+  box-shadow: 0 20px 25px -5px rgba(124, 92, 255, 0.1), 0 10px 10px -5px rgba(0, 217, 255, 0.05);
 }
 
-/* Card Styles */
+/* Card Styles - With Gradient Effects */
 .card-bg {
-  background-color: var(--color-bg-primary);
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
   color: var(--color-text-primary);
+  transition: var(--transition-base);
 }
 
 .card-bg-secondary {
-  background-color: var(--color-bg-secondary);
+  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
   color: var(--color-text-primary);
+  transition: var(--transition-base);
 }
 
 .card-hover {
   background-color: var(--color-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(124, 92, 255, 0.2);
 }
 
 /* Text Styles */
@@ -117,30 +142,40 @@ body {
   color: var(--color-text-accent);
 }
 
-/* Invasion Level Badges */
+/* Invasion Level Badges - Enhanced Contrast */
 .invasion-extreme {
   background-color: var(--color-risk-extreme);
   color: var(--color-text-extreme);
+  border-left: 4px solid rgb(252, 165, 165);
+  transition: var(--transition-base);
 }
 
 .invasion-veryHigh {
   background-color: var(--color-risk-veryHigh);
   color: var(--color-text-veryHigh);
+  border-left: 4px solid rgb(248, 113, 113);
+  transition: var(--transition-base);
 }
 
 .invasion-high {
   background-color: var(--color-risk-high);
   color: var(--color-text-high);
+  border-left: 4px solid rgb(245, 158, 11);
+  transition: var(--transition-base);
 }
 
 .invasion-moderate {
   background-color: var(--color-risk-moderate);
   color: var(--color-text-moderate);
+  border-left: 4px solid rgb(250, 204, 21);
+  transition: var(--transition-base);
 }
 
 .invasion-low {
   background-color: var(--color-risk-low);
   color: var(--color-text-low);
+  border-left: 4px solid rgb(134, 239, 172);
+  transition: var(--transition-base);
 }
 
 /* Invasion Level Display */
@@ -164,26 +199,48 @@ body {
   color: var(--color-display-low);
 }
 
-/* Button Styles */
+/* Button Styles - Enhanced Interactions */
 .btn-primary {
-  background-color: var(--color-accent);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
   color: rgb(15, 23, 42);
+  transition: var(--transition-base);
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(124, 92, 255, 0.3);
+}
+
+.btn-primary:focus {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
 }
 
 .btn-secondary {
   background-color: var(--color-bg-secondary);
   color: var(--color-text-primary);
   border: 2px solid var(--color-border);
+  transition: var(--transition-base);
+  cursor: pointer;
 }
 
 .btn-secondary:hover {
   background-color: var(--color-bg-hover);
+  border-color: var(--color-accent);
+}
+
+.btn-secondary:focus {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
 }
 
 .btn-active {
-  background-color: var(--color-accent);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
   color: rgb(15, 23, 42);
-  border: 2px solid var(--color-accent-light);
+  border: 2px solid var(--color-secondary);
+  box-shadow: 0 0 20px rgba(124, 92, 255, 0.4);
 }
 
 /* Warning Styles */
