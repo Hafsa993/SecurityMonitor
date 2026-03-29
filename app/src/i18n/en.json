@@ -289,6 +289,72 @@
           "adResult": "Educational credential theft targeting"
         }
       }
+    },
+    "sarah": {
+      "location": {
+        "schoolPickup": {
+          "insight": "School drop-off/pickup: 8am & 3pm daily",
+          "adResult": "Kids clothing stores & family restaurants near school"
+        }
+      },
+      "microphone": {
+        "kidsSchool": {
+          "insight": "Conversations about kids school & activities",
+          "adResult": "Educational programs & kids sports camps"
+        },
+        "workFamily": {
+          "insight": "Work stress & family planning talk",
+          "adResult": "Family wellness & stress management services"
+        }
+      },
+      "notifications": {
+        "morningRush": {
+          "insight": "Morning rush: 7-8am (kids getting ready)",
+          "adResult": "Quick breakfast & school supplies at 7:30am"
+        },
+        "workHours": {
+          "insight": "Lower responsiveness during work (9-5)",
+          "adResult": "Work-related ads avoided, evening targeting instead"
+        },
+        "eveningFamily": {
+          "insight": "Evening family time: 6-9pm engagement",
+          "adResult": "Family deals, dinner services at 6pm exactly"
+        }
+      },
+      "camera": {
+        "workAppearance": {
+          "insight": "Professional appearance at work",
+          "adResult": "Workwear & professional services ads"
+        },
+        "familyHome": {
+          "insight": "Family home with kids visible",
+          "adResult": "Family-oriented products & parenting services"
+        }
+      },
+      "contacts": {
+        "family": {
+          "insight": "Spouse, kids, extended family",
+          "adResult": "Family status & household composition targeting"
+        },
+        "parentNetwork": {
+          "insight": "Parent network: school contacts & other parents",
+          "adResult": "Parent community cluster targeting"
+        },
+        "locationExtra": {
+          "insight": "School pickup location with other parents",
+          "adResult": "Parent group ads & family event targeting"
+        }
+      },
+      "clipboard": {
+        "schoolLogin": {
+          "insight": "Kids school login information",
+          "adResult": "School account breach targeting parents"
+        },
+        "familyBudget": {
+          "insight": "Family budget notes & account numbers",
+          "adResult": "Financial fraud & identity theft targeting"
+        }
+      }
     }
   },
   "items": {
@@ -323,6 +389,41 @@
           "Late night activity: 10pm-2am gaming sessions",
           "Morning gym session prep: 5-6am activity spike",
           "Weekend social engagement: high notification response Sat/Sun nights"
+        ]
+      }
+    },
+    "sarah": {
+      "location": {
+        "extraItems": [
+          "School drop-off/pickup: 8am and 3pm daily",
+          "Office commute: 9am-5pm weekdays",
+          "Grocery and shopping routine: Weekly pattern"
+        ]
+      },
+      "camera": {
+        "extraItems": [
+          "Professional work appearance and casual home attire",
+          "Family home with kids present in background"
+        ]
+      },
+      "contacts": {
+        "extraItems": [
+          "Family: spouse, kids, extended family",
+          "Professional network: work colleagues, manager",
+          "Parent network: school contacts, other parents"
+        ]
+      },
+      "notifications": {
+        "extraItems": [
+          "Morning routine: 7-8am device activity (kids getting ready)",
+          "School hours: lower responsiveness (work meetings)",
+          "Evening family time: 6-9pm varied engagement"
+        ]
+      },
+      "clipboard": {
+        "extraItems": [
+          "Kids school login information",
+          "Family budget notes and account numbers"
         ]
       }
     }

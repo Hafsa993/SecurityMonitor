@@ -289,6 +289,72 @@
           "adResult": "Diebstahl von Bildungsanmeldedaten-Targeting"
         }
       }
+    },
+    "sarah": {
+      "location": {
+        "schoolPickup": {
+          "insight": "Schulauftakt/-abhol: täglich 8:00 und 15:00 Uhr",
+          "adResult": "Kinderkleidungsgeschäfte und Familienrestaurants in der Nähe der Schule"
+        }
+      },
+      "microphone": {
+        "kidsSchool": {
+          "insight": "Gespräche über Schulkinder und Aktivitäten",
+          "adResult": "Bildungsprogramme und Kindersportlager"
+        },
+        "workFamily": {
+          "insight": "Arbeitsstress und Familienplanungsgespräche",
+          "adResult": "Familien-Wellness- und Stressabbau-Dienste"
+        }
+      },
+      "notifications": {
+        "morningRush": {
+          "insight": "Morgenhaast: 7-8 Uhr (Kinder werden fertig)",
+          "adResult": "Schnelle Frühstücks- und Schulverbrauchsanzeigen um 7:30 Uhr"
+        },
+        "workHours": {
+          "insight": "Geringere Reaktion während der Arbeitszeit (9-17 Uhr)",
+          "adResult": "Arbeitsbezogene Anzeigen vermieden, stattdessen Abend-Targeting"
+        },
+        "eveningFamily": {
+          "insight": "Familienzeit am Abend: 18-21 Uhr Engagement",
+          "adResult": "Familienangebot, Dinnerservices um 18 Uhr"
+        }
+      },
+      "camera": {
+        "workAppearance": {
+          "insight": "Berufliches Erscheinungsbild bei der Arbeit",
+          "adResult": "Berufskleidung und professionelle Service-Anzeigen"
+        },
+        "familyHome": {
+          "insight": "Familienheim mit sichtbaren Kindern",
+          "adResult": "Familienorientierte Produkte und Elterndienste"
+        }
+      },
+      "contacts": {
+        "family": {
+          "insight": "Ehepartner, Kinder, erweiterte Familie",
+          "adResult": "Familienstand und Haushaltszusammensetzungs-Targeting"
+        },
+        "parentNetwork": {
+          "insight": "Elternnetzwerk: Schulkontakte und andere Eltern",
+          "adResult": "Eltern-Community-Cluster-Targeting"
+        },
+        "locationExtra": {
+          "insight": "Schulabholort mit anderen Eltern",
+          "adResult": "Eltern-Gruppen-Anzeigen und Familienveranstaltungs-Targeting"
+        }
+      },
+      "clipboard": {
+        "schoolLogin": {
+          "insight": "Anmeldeinformationen der Schulkinder",
+          "adResult": "Sicherheitsverletzungsziel für Schulkonten bei Eltern"
+        },
+        "familyBudget": {
+          "insight": "Notizen zum Familienbudget und Kontonummern",
+          "adResult": "Finanzbetrugsziele und Identitätsdiebstahl-Targeting"
+        }
+      }
     }
   },
   "items": {
@@ -323,6 +389,41 @@
           "Spätnacht-Aktivität: 22 Uhr bis 2 Uhr Gaming-Sitzungen",
           "Vorbereitung der Morgen-Trainingseinheit: 5-6 Uhr Aktivitätsspitze",
           "Wochenend-Sozialengagement: hohe Benachrichtigungsreaktion Sa/So Abende"
+        ]
+      }
+    },
+    "sarah": {
+      "location": {
+        "extraItems": [
+          "Schulauftakt/-abhol: täglich 8:00 und 15:00 Uhr",
+          "Berufsverkehr: Mo-Fr 9-17 Uhr",
+          "Lebensmittelgeschäft- und Einkaufsroutine: Wöchentliches Muster"
+        ]
+      },
+      "camera": {
+        "extraItems": [
+          "Berufliches Erscheinungsbild und legerer Hausanzug",
+          "Familienheim mit Kindern im Hintergrund"
+        ]
+      },
+      "contacts": {
+        "extraItems": [
+          "Familie: Ehepartner, Kinder, erweiterte Familie",
+          "Berufliches Netzwerk: Arbeitskollegen, Manager",
+          "Elternnetzwerk: Schulkontakte, andere Eltern"
+        ]
+      },
+      "notifications": {
+        "extraItems": [
+          "Morgenroutine: 7-8 Uhr Geräteaktivität (Kinder werden fertig)",
+          "Schulstunden: geringere Reaktion (Arbeitsbesprechungen)",
+          "Familienzeit am Abend: 18-21 Uhr variabler Engagement"
+        ]
+      },
+      "clipboard": {
+        "extraItems": [
+          "Anmeldeinformationen der Schulkinder",
+          "Notizen zum Familienbudget und Kontonummern"
         ]
       }
     }
