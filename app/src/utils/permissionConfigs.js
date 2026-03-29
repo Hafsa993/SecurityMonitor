@@ -94,7 +94,7 @@ export const PERMISSION_CONFIGS = {
         icon: '⚖️',
         title: 'Legal Reality & Changes',
         description:
-          'iOS 14+ now alerts you when apps access clipboard (you can see the warning). Apps must justify clipboard access. This led to many apps removing clipboard reading. Android is following suit.',
+          'Many devices now alert you when apps access clipboard (you can see the warning). Apps must justify clipboard access. This led to many apps removing clipboard reading. Android is following suit.',
       },
     ],
   },

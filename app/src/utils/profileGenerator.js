@@ -72,25 +72,6 @@ export function generateProfile(enabledPermissions, duration, persona = null) {
     scenarios.push(...notificationsSection.scenarios);
   }
 
-  // Determine combo warning based on enabled permissions
-  const permCount = enabledPermissions.length;
-  if (hasPermission('location') && hasPermission('contacts')) {
-    comboWarning =
-      getComboWarning(personaId, 'locationContacts') ||
-      '💡 Location + Contacts = They know who you\'re with and where. Can infer relationships, social circles, and meetings.';
-  } else if (hasPermission('camera') && hasPermission('microphone')) {
-    comboWarning =
-      getComboWarning(personaId, 'cameraMicrophone') ||
-      '💡 Camera + Microphone = They can see and hear you simultaneously. Enables lip-reading and emotional analysis.';
-  } else if (hasPermission('location') && hasPermission('camera') && hasPermission('microphone')) {
-    comboWarning =
-      getComboWarning(personaId, 'all') ||
-      '💡 Location + Camera + Microphone = Complete surveillance. They know where you are, what you look like, who you\'re with, and what you\'re saying.';
-  } else if (permCount >= 5) {
-    comboWarning = `💡 ${permCount} permissions enabled = Comprehensive data collection across multiple dimensions of your life.`;
-  }
-
-
   // Protection Tips
   const protectionTips = [
     'Regularly review app permissions in your phone settings',
@@ -122,8 +103,8 @@ export function generateProfile(enabledPermissions, duration, persona = null) {
     duration: getDurationText(duration),
     invasionLevel,
     categories,
-    scenarios: scenarios.slice(0, 4),
+    scenarios,
     comboWarning,
-    protectionTips: protectionTips.slice(0, 6),
+    protectionTips: protectionTips,
   };
 }

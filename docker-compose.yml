@@ -1,0 +1,35 @@
+
+services:
+  privacy-tracker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: privacy-tracker-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    volumes:
+      - /app/node_modules  # Don't mount node_modules from host
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    # Optional: Use for development with hot reload
+    # environment:
+    #   - NODE_ENV=development
+    # command: npm run dev
+    # volumes:
+    #   - ./app/src:/app/src
+    #   - ./app/public:/app/public

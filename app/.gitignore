@@ -4,3 +4,15 @@ node_modules
 .DS_Store
 .env.local
 .env.*.local
+# Docker
+tar
+*.tar
+*.tar.gz
+docker-compose.override.yml
+
+# Docker build cache
+.docker/
+
+# Environment files (keep only template)
+.env
+.env.*.local
