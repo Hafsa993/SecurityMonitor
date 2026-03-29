@@ -1,0 +1,330 @@
+{
+  "app": {
+    "title": "Privacy Tracker",
+    "subtitle": "See What Websites Know About You",
+    "description": "Interactive tool to visualize what websites can know with different permissions"
+  },
+  "header": {
+    "mainTitle": "Privacy Tracker",
+    "mainSubtitle": "See what websites know about you based on permissions and tracking duration."
+  },
+  "permissionTracker": {
+    "permissionsLabel": "Permissions",
+    "noPermissionsTitle": "No Permissions Enabled",
+    "noPermissionsMessage": "Toggle some permissions above to see what a website could know about you"
+  },
+  "permissions": {
+    "location": {
+      "name": "Location",
+      "icon": "📍",
+      "description": "Access to your current location and movement patterns"
+    },
+    "camera": {
+      "name": "Camera",
+      "icon": "📹",
+      "description": "Access to your device camera and visual feed"
+    },
+    "microphone": {
+      "name": "Microphone",
+      "icon": "🎤",
+      "description": "Access to your device microphone and audio"
+    },
+    "clipboard": {
+      "name": "Clipboard",
+      "icon": "📋",
+      "description": "Access to everything you copy or paste"
+    },
+    "contacts": {
+      "name": "Contacts",
+      "icon": "👥",
+      "description": "Access to your contacts and social connections"
+    },
+    "notifications": {
+      "name": "Notifications",
+      "icon": "🔔",
+      "description": "Permission to send you notifications"
+    }
+  },
+  "durationSlider": {
+    "label": "Tracking Duration",
+    "risk": "Risk",
+    "days": "days",
+    "durations": {
+      "1": "1 day",
+      "7": "1 week",
+      "30": "1 month",
+      "90": "3 months",
+      "365": "1 year"
+    },
+    "invasionLevels": {
+      "low": "Low",
+      "moderate": "Moderate",
+      "high": "High",
+      "veryHigh": "Very High",
+      "extreme": "Extreme"
+    }
+  },
+  "personaSelector": {
+    "label": "Select a Persona",
+    "personas": {
+      "anonymous": {
+        "name": "Anonymous",
+        "type": "Generic"
+      },
+      "max": {
+        "name": "Max",
+        "type": "College Student"
+      },
+      "sarah": {
+        "name": "Sarah",
+        "type": "Parent"
+      }
+    }
+  },
+  "profileCard": {
+    "title": "Data Profile Summary",
+    "subtitle": "After",
+    "ofTracking": "of tracking",
+    "privacyRisk": "Privacy Risk",
+    "scenarios": "What They Could Do With This Data",
+    "protectionTitle": "How to Protect Yourself"
+  },
+  "permissionConfigs": {
+    "location": {
+      "categoryTitle": "📍 Location & Movement",
+      "baseItems": [
+        "Your exact home address and work location",
+        "Daily movement patterns and routines",
+        "Frequency of visits to specific places (gyms, cafes, stores)",
+        "Time spent at each location",
+        "Commute patterns and travel routes",
+        "Places you visit late at night or frequently"
+      ],
+      "targetedMarketing": {
+        "title": "Targeted Marketing",
+        "description": "Ads for services near your detected locations (restaurants near gym, stores near home). This is happening right now with major apps."
+      },
+      "legalReality": {
+        "title": "Legal Reality",
+        "description": "Location tracking is legal and widespread. Most apps disclose it in privacy policies. However, location data is often sold to data brokers and used for purposes you didn't authorize."
+      }
+    },
+    "camera": {
+      "categoryTitle": "📹 Visual Information",
+      "baseItems": [
+        "Your physical appearance and facial features",
+        "What you wear and fashion preferences",
+        "Your surroundings and living space",
+        "Objects you interact with most",
+        "Your emotional expressions and reactions",
+        "People around you and their appearance"
+      ],
+      "facialRecognition": {
+        "title": "Facial Recognition (Technical Reality)",
+        "description": "Technically possible with modern AI, but most mainstream apps don't do this yet. Governments and tech companies actually do this at scale."
+      },
+      "legalReality": {
+        "title": "Legal Reality",
+        "description": "Facial recognition use is increasingly regulated. EU bans some uses, US has varying state laws. Apps must disclose if they use facial recognition. Lip-reading is not widely deployed yet, but technically feasible."
+      }
+    },
+    "microphone": {
+      "categoryTitle": "🎤 Audio & Conversation",
+      "baseItems": [
+        "Your voice characteristics and accent",
+        "Conversations happening around you",
+        "Background noise reveals your environment",
+        "Emotional tone and stress levels in voice",
+        "Languages you speak",
+        "Voice assistant commands you use"
+      ],
+      "conversationMonitoring": {
+        "title": "Conversation Monitoring (Technically Possible)",
+        "description": "With microphone access, apps can listen to nearby conversations and understand what you're talking about. This could be used to profile your interests, infer your mood and stress levels, or target you with relevant apps and ads based on conversation topics. Technically possible but varies by app intent and capability."
+      },
+      "legalReality": {
+        "title": "Legal Reality",
+        "description": "Recording conversations without consent is illegal in many jurisdictions (two-party consent states in US). Apps must disclose audio recording. This is one of the most controversial permissions."
+      }
+    },
+    "clipboard": {
+      "categoryTitle": "📋 Sensitive Information",
+      "baseItems": [
+        "Passwords and authentication codes",
+        "Private messages and personal communications",
+        "Financial account numbers",
+        "Health-related information you copy",
+        "Search queries and interests",
+        "Addresses and contact information"
+      ],
+      "securityBreach": {
+        "title": "Security Breach (Actually Happened)",
+        "description": "This is real. Over 100 popular apps were caught reading clipboard data. Many widely used social media and communication platforms collected everything users copy-paste."
+      },
+      "legalReality": {
+        "title": "Legal Reality & Changes",
+        "description": "Many devices now alert you when apps access clipboard (you can see the warning). Apps must justify clipboard access. This led to many apps removing clipboard reading. Android is following suit."
+      }
+    },
+    "contacts": {
+      "categoryTitle": "👥 Social Network & Relationships",
+      "baseItems": [
+        "Everyone in your contact list",
+        "Inference of close relationships and family",
+        "Professional connections and work network",
+        "Relationship status based on contact frequency",
+        "Contact with medical professionals, lawyers, etc.",
+        "Network analysis to identify influential people in your circles"
+      ],
+      "socialGraphAnalysis": {
+        "title": "Social Graph Analysis (Widely Used)",
+        "description": "Popular social media and communication apps use contact uploading to build social graphs. This is standard practice for recommendation algorithms."
+      },
+      "legalReality": {
+        "title": "Legal Reality",
+        "description": "Contact uploading is mostly legal if disclosed, but increasingly scrutinized. GDPR requires explicit consent. Some apps upload contacts without clear consent - this has led to lawsuits."
+      }
+    },
+    "notifications": {
+      "categoryTitle": "🔔 Activity Tracking",
+      "baseItems": [
+        "When you use your device and how often",
+        "Times of day you are most active",
+        "When you check specific apps",
+        "Your response patterns to alerts",
+        "Active hours and sleep schedule",
+        "Engagement levels with different content"
+      ],
+      "behaviorAnalysis": {
+        "title": "Behavior Analysis (Standard Practice)",
+        "description": "All major apps track engagement and optimize push notification timing. This is standard for engagement metrics and A/B testing."
+      },
+      "legalReality": {
+        "title": "Legal Reality",
+        "description": "Notification permission is mostly benign legally, but enables behavior manipulation. GDPR and recent laws restrict how aggressively apps can use notifications to influence behavior."
+      }
+    }
+  },
+  "protectionTips": [
+    "Regularly review app permissions in your phone settings",
+    "Only grant permissions when you're actually using the feature",
+    "Read privacy policies before installing apps",
+    "Use privacy-focused alternatives for sensitive apps",
+    "Clear app cache and data regularly",
+    "Disable location services when not needed",
+    "Cover your camera when not in use",
+    "Be cautious of websites requesting excessive permissions",
+    "Avoid copying sensitive information like passwords into apps"
+  ],
+  "sourcesBreakdown": {
+    "label": "? How they know this"
+  },
+  "sources": {
+    "max": {
+      "location": {
+        "gym": {
+          "insight": "Gym visits: Mon/Wed/Fri at 6am",
+          "adResult": "Protein supplements & fitness gear ads near gym"
+        }
+      },
+      "microphone": {
+        "gaming": {
+          "insight": "Conversations about gaming tournaments & wins",
+          "adResult": "Gaming peripherals & esports event ads"
+        },
+        "fitness": {
+          "insight": "Fitness goals & gym discussion",
+          "adResult": "Premium workout and nutrition ads"
+        }
+      },
+      "notifications": {
+        "morningGym": {
+          "insight": "Morning gym session prep (5-6am spike)",
+          "adResult": "Pre-workout ads & gym membership deals at 5am"
+        },
+        "lateNight": {
+          "insight": "Late night activity spike: 10pm-2am",
+          "adResult": "Gaming deals pushed at midnight"
+        },
+        "morningGymNight": {
+          "insight": "Morning gym session prep: 5-6am",
+          "adResult": "Gym motivation ads at 5am, fitness deals"
+        },
+        "downtown": {
+          "insight": "Downtown on Saturday nights",
+          "adResult": "Social event & bar ads on Friday nights"
+        }
+      },
+      "camera": {
+        "athletic": {
+          "insight": "Athletic build in gym/casual college student style",
+          "adResult": "Fitness & athletic brand targeting"
+        },
+        "gaming": {
+          "insight": "Dorm room with gaming setup",
+          "adResult": "Gaming hardware & electronics ads"
+        }
+      },
+      "contacts": {
+        "friends": {
+          "insight": "Close friend group: 5-6 high school friends",
+          "adResult": "Influencer identification in friend group"
+        },
+        "campus": {
+          "insight": "Campus contacts: classmates & help desk colleagues",
+          "adResult": "Social network mapping for targeting"
+        },
+        "locationExtra": {
+          "insight": "Gym & library patterns",
+          "adResult": "Social cluster mapping by location"
+        }
+      },
+      "clipboard": {
+        "gaming": {
+          "insight": "Gaming account passwords & login credentials",
+          "adResult": "Gaming account takeover & fraud targeting"
+        },
+        "email": {
+          "insight": "College email & campus portal access",
+          "adResult": "Educational credential theft targeting"
+        }
+      }
+    }
+  },
+  "items": {
+    "max": {
+      "location": {
+        "extraItems": [
+          "Gym visits: Mon/Wed/Fri at 6am",
+          "Library study sessions: 10am-4pm daily",
+          "Weekend downtown hangouts: Saturday nights"
+        ]
+      },
+      "camera": {
+        "extraItems": [
+          "Athletic build and casual college student style",
+          "Dorm room with gaming setup and fitness equipment"
+        ]
+      },
+      "clipboard": {
+        "extraItems": [
+          "Gaming account passwords and credentials",
+          "College email and campus portal logins"
+        ]
+      },
+      "contacts": {
+        "extraItems": [
+          "Close friend group: 5-6 high school friends",
+          "Campus contacts: classmates, help desk colleagues"
+        ]
+      },
+      "notifications": {
+        "extraItems": [
+          "Late night activity: 10pm-2am gaming sessions",
+          "Morning gym session prep: 5-6am activity spike",
+          "Weekend social engagement: high notification response Sat/Sun nights"
+        ]
+      }
+    }
+  }
+}

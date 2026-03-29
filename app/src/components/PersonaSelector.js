@@ -1,8 +1,10 @@
 'use client';
 
+import { useLanguage } from '@/context/LanguageContext';
 import { PERSONAS } from '@/utils/personas';
 
 export default function PersonaSelector({ selectedPersona, onPersonaChange }) {
+  const { t } = useLanguage();
   const personaList = ['anonymous', 'max', 'sarah'];
 
   const getPersonaDisplay = (personaId) => {
@@ -10,15 +12,15 @@ export default function PersonaSelector({ selectedPersona, onPersonaChange }) {
     if (!persona) return { emoji: '❓', name: 'Unknown', type: '' };
     return {
       emoji: persona.emoji,
-      name: persona.name,
-      type: persona.type,
+      name: t(`personaSelector.personas.${personaId}.name`, persona.name),
+      type: t(`personaSelector.personas.${personaId}.type`, persona.type),
     };
   };
 
   return (
     <div className="card-bg rounded-lg p-6 mb-6">
       <h2 className="heading-accent mb-4">
-        Select a Persona
+        {t('personaSelector.label', 'Select a Persona')}
       </h2>
       <div className="grid grid-cols-3 gap-2">
         {personaList.map((personaId) => {

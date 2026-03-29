@@ -106,5 +106,6 @@ export function generateProfile(enabledPermissions, duration, persona = null) {
     scenarios,
     comboWarning,
     protectionTips: protectionTips,
+    personaId, // Add persona ID for translation lookups
   };
 }

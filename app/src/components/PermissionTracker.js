@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 import PermissionToggle from './PermissionToggle';
 import ProfileCard from './ProfileCard';
 import DurationSlider from './DurationSlider';
@@ -8,46 +9,8 @@ import PersonaSelector from './PersonaSelector';
 import { generateProfile } from '@/utils/profileGenerator';
 import { PERSONAS } from '@/utils/personas';
 
-const PERMISSIONS = [
-  {
-    id: 'location',
-    name: 'Location',
-    icon: '📍',
-    description: 'Access to your current location and movement patterns',
-  },
-  {
-    id: 'camera',
-    name: 'Camera',
-    icon: '📹',
-    description: 'Access to your device camera and visual feed',
-  },
-  {
-    id: 'microphone',
-    name: 'Microphone',
-    icon: '🎤',
-    description: 'Access to your device microphone and audio',
-  },
-  {
-    id: 'clipboard',
-    name: 'Clipboard',
-    icon: '📋',
-    description: 'Access to everything you copy or paste',
-  },
-  {
-    id: 'contacts',
-    name: 'Contacts',
-    icon: '👥',
-    description: 'Access to your contacts and social connections',
-  },
-  {
-    id: 'notifications',
-    name: 'Notifications',
-    icon: '🔔',
-    description: 'Permission to send you notifications',
-  },
-];
-
 export default function PermissionTracker() {
+  const { t } = useLanguage();
   const [permissions, setPermissions] = useState({
     location: false,
     camera: false,
@@ -59,6 +22,46 @@ export default function PermissionTracker() {
   const [duration, setDuration] = useState(7); // days
   const [selectedPersona, setSelectedPersona] = useState('anonymous');
   const [profile, setProfile] = useState(null);
+
+  // Define PERMISSIONS with translations
+  const PERMISSIONS = [
+    {
+      id: 'location',
+      name: t('permissions.location.name', 'Location'),
+      icon: '📍',
+      description: t('permissions.location.description', 'Access to your current location and movement patterns'),
+    },
+    {
+      id: 'camera',
+      name: t('permissions.camera.name', 'Camera'),
+      icon: '📹',
+      description: t('permissions.camera.description', 'Access to your device camera and visual feed'),
+    },
+    {
+      id: 'microphone',
+      name: t('permissions.microphone.name', 'Microphone'),
+      icon: '🎤',
+      description: t('permissions.microphone.description', 'Access to your device microphone and audio'),
+    },
+    {
+      id: 'clipboard',
+      name: t('permissions.clipboard.name', 'Clipboard'),
+      icon: '📋',
+      description: t('permissions.clipboard.description', 'Access to everything you copy or paste'),
+    },
+    {
+      id: 'contacts',
+      name: t('permissions.contacts.name', 'Contacts'),
+      icon: '👥',
+      description: t('permissions.contacts.description', 'Access to your contacts and social connections'),
+    },
+    {
+      id: 'notifications',
+      name: t('permissions.notifications.name', 'Notifications'),
+      icon: '🔔',
+      description: t('permissions.notifications.description', 'Permission to send you notifications'),
+    },
+  ];
 
   // Initialize permissions and persona from localStorage
   useEffect(() => {
@@ -120,7 +123,7 @@ export default function PermissionTracker() {
           {/* Permissions */}
           <div className="card-bg rounded-lg p-6">
             <h2 className="heading-accent mb-4">
-              Permissions ({enabledCount}/{PERMISSIONS.length})
+              {t('permissionTracker.permissionsLabel', 'Permissions')} ({enabledCount}/{PERMISSIONS.length})
             </h2>
             <div className="space-y-3">
               {PERMISSIONS.map((permission) => (
@@ -143,9 +146,9 @@ export default function PermissionTracker() {
         {enabledCount === 0 && (
           <div className="card-bg rounded-lg p-12 text-center">
             <p className="text-2xl mb-4">🛡️</p>
-            <p className="text-xl font-semibold text-primary mb-2">No Permissions Enabled</p>
+            <p className="text-xl font-semibold text-primary mb-2">{t('permissionTracker.noPermissionsTitle', 'No Permissions Enabled')}</p>
             <p className="text-secondary">
-              Toggle some permissions above to see what a website could know about you
+              {t('permissionTracker.noPermissionsMessage', 'Toggle some permissions above to see what a website could know about you')}
             </p>
           </div>
         )}

@@ -4,12 +4,15 @@ export const PERSONA_CONFIGS = {
     location: {
       extraItems: ['Gym visits: Mon/Wed/Fri at 6am', 'Library study sessions: 10am-4pm daily', 'Weekend downtown hangouts: Saturday nights'],
       description: 'Ads for gaming cafes near campus, protein supplements near gym, coffee shops on your morning route, weekend bars and social spots downtown.',
+      descriptionDe: 'Anzeigen für Gaming-Cafés auf dem Campus, Proteinpräparate in der Nähe des Fitnessstudios, Kaffeeshops auf Ihrer Morgenroute, Bars am Wochenende und Treffpunkte in der Innenstadt.',
       baseSources: [
         {
           permissionEmoji: '📍',
           permissionName: 'Location',
           insight: 'Gym visits: Mon/Wed/Fri at 6am',
+          insightKey: 'sources.max.location.gym.insight',
           adResult: 'Protein supplements & fitness gear ads near gym',
+          adResultKey: 'sources.max.location.gym.adResult',
         },
       ],
       microphone: [
@@ -17,13 +20,17 @@ export const PERSONA_CONFIGS = {
           permissionEmoji: '🎤',
           permissionName: 'Audio',
           insight: 'Conversations about gaming tournaments & wins',
+          insightKey: 'sources.max.microphone.gaming.insight',
           adResult: 'Gaming peripherals & esports event ads',
+          adResultKey: 'sources.max.microphone.gaming.adResult',
         },
         {
           permissionEmoji: '🎤',
           permissionName: 'Audio',
           insight: 'Fitness goals & gym discussion',
+          insightKey: 'sources.max.microphone.fitness.insight',
           adResult: 'Premium workout and nutrition ads',
+          adResultKey: 'sources.max.microphone.fitness.adResult',
         },
       ],
       notifications: [
@@ -31,50 +38,64 @@ export const PERSONA_CONFIGS = {
           permissionEmoji: '🔔',
           permissionName: 'Activity',
           insight: 'Morning gym session prep (5-6am spike)',
+          insightKey: 'sources.max.notifications.morningGym.insight',
           adResult: 'Pre-workout ads & gym membership deals at 5am',
+          adResultKey: 'sources.max.notifications.morningGym.adResult',
         },
       ],
     },
     camera: {
       items: ['Athletic build and casual college student style', 'Dorm room with gaming setup and fitness equipment'],
       description: 'They can see you in casual athletic wear at gym, in class at library, gaming at night. Your dorm setup reveals gaming interests and fitness focus.',
+      descriptionDe: 'Sie können Sie in sportlicher Kleidung im Fitnessstudio sehen, im Unterricht in der Bibliothek, nachts beim Gaming. Ihr Zimmersetup zeigt Gaming-Interessen und Fitnessfokus.',
       sources: [
         {
           permissionEmoji: '📹',
           permissionName: 'Camera',
           insight: 'Athletic build in gym/casual college student style',
+          insightKey: 'sources.max.camera.athletic.insight',
           adResult: 'Fitness & athletic brand targeting',
+          adResultKey: 'sources.max.camera.athletic.adResult',
         },
         {
           permissionEmoji: '📹',
           permissionName: 'Camera',
           insight: 'Dorm room with gaming setup',
+          insightKey: 'sources.max.camera.gaming.insight',
           adResult: 'Gaming hardware & electronics ads',
+          adResultKey: 'sources.max.camera.gaming.adResult',
         },
       ],
     },
     contacts: {
       items: ['Close friend group: 5-6 high school friends', 'Campus contacts: classmates, help desk colleagues'],
       description: 'They map your college friend network, identify your closest friends, see your social circle strength and diversity.',
+      descriptionDe: 'Sie kartografieren Ihr Uni-Freundesnetzwerk, identifizieren Ihre engsten Freunde und sehen die Stärke und Vielfalt Ihres sozialen Kreises.',
       sources: [
         {
           permissionEmoji: '👥',
           permissionName: 'Contacts',
           insight: 'Close friend group: 5-6 high school friends',
+          insightKey: 'sources.max.contacts.friends.insight',
           adResult: 'Influencer identification in friend group',
+          adResultKey: 'sources.max.contacts.friends.adResult',
         },
         {
           permissionEmoji: '👥',
           permissionName: 'Contacts',
           insight: 'Campus contacts: classmates & help desk colleagues',
+          insightKey: 'sources.max.contacts.campus.insight',
           adResult: 'Social network mapping for targeting',
+          adResultKey: 'sources.max.contacts.campus.adResult',
         },
       ],
       locationExtra: {
         permissionEmoji: '📍',
         permissionName: 'Location',
         insight: 'Gym & library patterns',
+        insightKey: 'sources.max.contacts.locationExtra.insight',
         adResult: 'Social cluster mapping by location',
+        adResultKey: 'sources.max.contacts.locationExtra.adResult',
       },
     },
     notifications: {
@@ -85,25 +106,33 @@ export const PERSONA_CONFIGS = {
       ],
       description:
         'They know you game at night, work out at dawn, socialize weekends. Target gaming deals at midnight, gym motivation at 5am, party invites on Friday nights.',
+      descriptionDe:
+        'Sie wissen, dass Sie nachts zocken, in der Frühe trainieren und am Wochenende sozial aktiv sind. Gaming-Deals um Mitternacht, Fitnessmotivation um 5 Uhr morgens, Party-Einladungen am Freitagabend.',
       sources: [
         {
           permissionEmoji: '🔔',
           permissionName: 'Activity',
           insight: 'Late night activity spike: 10pm-2am',
+          insightKey: 'sources.max.notifications.lateNight.insight',
           adResult: 'Gaming deals pushed at midnight',
+          adResultKey: 'sources.max.notifications.lateNight.adResult',
         },
         {
           permissionEmoji: '🔔',
           permissionName: 'Activity',
           insight: 'Morning gym session prep: 5-6am',
+          insightKey: 'sources.max.notifications.morningGymNight.insight',
           adResult: 'Gym motivation ads at 5am, fitness deals',
+          adResultKey: 'sources.max.notifications.morningGymNight.adResult',
         },
       ],
       locationExtra: {
         permissionEmoji: '📍',
         permissionName: 'Location',
         insight: 'Downtown on Saturday nights',
+        insightKey: 'sources.max.notifications.downtown.insight',
         adResult: 'Social event & bar ads on Friday nights',
+        adResultKey: 'sources.max.notifications.downtown.adResult',
       },
     },
     clipboard: {
@@ -115,13 +144,17 @@ export const PERSONA_CONFIGS = {
           permissionEmoji: '📋',
           permissionName: 'Clipboard',
           insight: 'Gaming account passwords & login credentials',
+          insightKey: 'sources.max.clipboard.gaming.insight',
           adResult: 'Gaming account takeover & fraud targeting',
+          adResultKey: 'sources.max.clipboard.gaming.adResult',
         },
         {
           permissionEmoji: '📋',
           permissionName: 'Clipboard',
           insight: 'College email & campus portal access',
+          insightKey: 'sources.max.clipboard.email.insight',
           adResult: 'Educational credential theft targeting',
+          adResultKey: 'sources.max.clipboard.email.adResult',
         },
       ],
     },
@@ -282,4 +315,18 @@ export function getComboWarning(personaId, type) {
     return personaData.comboWarnings[type];
   }
   return null;
+}
+
+// Helper function to get translated persona description
+export function getPersonaDescription(personaId, permissionType, language = 'en') {
+  const personaData = getPersonaData(personaId);
+  if (!personaData?.[permissionType]) {
+    return null;
+  }
+  
+  const permission = personaData[permissionType];
+  if (language === 'de' && permission.descriptionDe) {
+    return permission.descriptionDe;
+  }
+  return permission.description || null;
 }

@@ -6,6 +6,7 @@ import { getPersonaData } from './personaConfigs.js';
 export function buildLocationSection(hasPermission, personaId) {
   const config = PERMISSION_CONFIGS.location;
   const items = [...config.baseItems];
+  const baseItemsLength = config.baseItems.length;
   let sources = [];
   let description = config.scenarios[0].baseDescription;
 
@@ -34,9 +35,15 @@ export function buildLocationSection(hasPermission, personaId) {
   }
 
   return {
-    category: { title: config.categoryTitle, items },
+    category: { 
+      title: config.categoryTitle, 
+      titleKey: config.categoryTitleKey,
+      permissionType: 'location',
+      baseItemsLength,
+      items 
+    },
     scenarios: [
-      { icon: '🏠', title: 'Targeted Marketing', description, sources },
+      { ...config.scenarios[0], description, sources },
       config.scenarios[1], // Legal Reality
     ],
   };
@@ -45,6 +52,7 @@ export function buildLocationSection(hasPermission, personaId) {
 export function buildCameraSection(personaId) {
   const config = PERMISSION_CONFIGS.camera;
   const items = [...config.baseItems];
+  const baseItemsLength = config.baseItems.length;
   let description = config.scenarios[0].baseDescription;
   let sources = [];
 
@@ -66,10 +74,55 @@ export function buildCameraSection(personaId) {
   }
 
   return {
-    category: { title: config.categoryTitle, items },
+    category: { 
+      title: config.categoryTitle,
+      titleKey: config.categoryTitleKey,
+      permissionType: 'camera',
+      baseItemsLength,
+      items 
+    },
     scenarios: [
-      { icon: '👤', title: 'Facial Recognition (Technical Reality)', description, sources },
+      { ...config.scenarios[0], permissionType: 'camera', description, sources },
       config.scenarios[1], // Legal Reality
+    ],
+  };
+}
+
+export function buildClipboardSection(personaId) {
+  const config = PERMISSION_CONFIGS.clipboard;
+  const items = [...config.baseItems];
+  const baseItemsLength = config.baseItems.length;
+  let description = config.scenarios[0].baseDescription;
+  let sources = [];
+
+  const personaData = getPersonaData(personaId);
+
+  if (personaData?.clipboard) {
+    items.push(...personaData.clipboard.items);
+    description = personaData.clipboard.description;
+    sources = personaData.clipboard.sources;
+  } else {
+    sources = [
+      {
+        permissionEmoji: '📋',
+        permissionName: 'Clipboard',
+        insight: 'Sensitive data copied & pasted',
+        adResult: 'Direct credential & financial theft',
+      },
+    ];
+  }
+
+  return {
+    category: { 
+      title: config.categoryTitle,
+      titleKey: config.categoryTitleKey,
+      permissionType: 'clipboard',
+      baseItemsLength,
+      items 
+    },
+    scenarios: [
+      { ...config.scenarios[0], permissionType: 'clipboard', description, sources },
+      config.scenarios[1], // Legal Reality & Changes
     ],
   };
 }
@@ -77,6 +130,7 @@ export function buildCameraSection(personaId) {
 export function buildMicrophoneSection(personaId) {
   const config = PERMISSION_CONFIGS.microphone;
   const items = [...config.baseItems];
+  const baseItemsLength = config.baseItems.length;
   let description = config.scenarios[0].baseDescription;
   let sources = [];
 
@@ -102,42 +156,16 @@ export function buildMicrophoneSection(personaId) {
   }
 
   return {
-    category: { title: config.categoryTitle, items },
+    category: { 
+      title: config.categoryTitle, 
+      titleKey: config.categoryTitleKey,
+      permissionType: 'microphone',
+      baseItemsLength,
+      items 
+    },
     scenarios: [
-      { icon: '🎙️', title: 'Conversation Monitoring (Technically Possible)', description, sources },
+      { ...config.scenarios[0], permissionType: 'microphone', description, sources },
       config.scenarios[1], // Legal Reality
-    ],
-  };
-}
-
-export function buildClipboardSection(personaId) {
-  const config = PERMISSION_CONFIGS.clipboard;
-  const items = [...config.baseItems];
-  let description = config.scenarios[0].baseDescription;
-  let sources = [];
-
-  const personaData = getPersonaData(personaId);
-
-  if (personaData?.clipboard) {
-    items.push(...personaData.clipboard.items);
-    description = personaData.clipboard.description;
-    sources = personaData.clipboard.sources;
-  } else {
-    sources = [
-      {
-        permissionEmoji: '📋',
-        permissionName: 'Clipboard',
-        insight: 'Sensitive data copied & pasted',
-        adResult: 'Direct credential & financial theft',
-      },
-    ];
-  }
-
-  return {
-    category: { title: config.categoryTitle, items },
-    scenarios: [
-      { icon: '🔐', title: 'Security Breach (Actually Happened)', description, sources },
-      config.scenarios[1], // Legal Reality & Changes
     ],
   };
 }
@@ -145,6 +173,7 @@ export function buildClipboardSection(personaId) {
 export function buildContactsSection(hasPermission, personaId) {
   const config = PERMISSION_CONFIGS.contacts;
   const items = [...config.baseItems];
+  const baseItemsLength = config.baseItems.length;
   let description = config.scenarios[0].baseDescription;
   let sources = [];
 
@@ -170,9 +199,15 @@ export function buildContactsSection(hasPermission, personaId) {
   }
 
   return {
-    category: { title: config.categoryTitle, items },
+    category: { 
+      title: config.categoryTitle,
+      titleKey: config.categoryTitleKey,
+      permissionType: 'contacts',
+      baseItemsLength,
+      items 
+    },
     scenarios: [
-      { icon: '🕸️', title: 'Social Graph Analysis (Widely Used)', description, sources },
+      { ...config.scenarios[0], permissionType: 'contacts', description, sources },
       config.scenarios[1], // Legal Reality
     ],
   };
@@ -181,6 +216,7 @@ export function buildContactsSection(hasPermission, personaId) {
 export function buildNotificationsSection(hasPermission, personaId) {
   const config = PERMISSION_CONFIGS.notifications;
   const items = [...config.baseItems];
+  const baseItemsLength = config.baseItems.length;
   let description = config.scenarios[0].baseDescription;
   let sources = [];
 
@@ -206,9 +242,15 @@ export function buildNotificationsSection(hasPermission, personaId) {
   }
 
   return {
-    category: { title: config.categoryTitle, items },
+    category: { 
+      title: config.categoryTitle,
+      titleKey: config.categoryTitleKey,
+      permissionType: 'notifications',
+      baseItemsLength,
+      items 
+    },
     scenarios: [
-      { icon: '⏰', title: 'Behavior Analysis (Standard Practice)', description, sources },
+      { ...config.scenarios[0], permissionType: 'notifications', description, sources },
       config.scenarios[1], // Legal Reality
     ],
   };

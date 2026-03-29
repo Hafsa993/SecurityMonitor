@@ -1,0 +1,330 @@
+{
+  "app": {
+    "title": "Privacy Tracker",
+    "subtitle": "Sehen Sie, was Websites über Sie wissen",
+    "description": "Interaktives Tool zur Visualisierung, was Websites mit verschiedenen Berechtigungen über Sie wissen können"
+  },
+  "header": {
+    "mainTitle": "Privacy Tracker",
+    "mainSubtitle": "Sehen Sie, was Websites basierend auf Berechtigungen und Tracking-Dauer über Sie wissen."
+  },
+  "permissionTracker": {
+    "permissionsLabel": "Berechtigungen",
+    "noPermissionsTitle": "Keine Berechtigungen aktiviert",
+    "noPermissionsMessage": "Aktivieren Sie einige Berechtigungen oben, um zu sehen, was eine Website über Sie wissen könnte"
+  },
+  "permissions": {
+    "location": {
+      "name": "Standort",
+      "icon": "📍",
+      "description": "Zugriff auf Ihren aktuellen Standort und Bewegungsmuster"
+    },
+    "camera": {
+      "name": "Kamera",
+      "icon": "📹",
+      "description": "Zugriff auf Ihre Gerätekamera und visuellen Feed"
+    },
+    "microphone": {
+      "name": "Mikrofon",
+      "icon": "🎤",
+      "description": "Zugriff auf Ihr Gerätmikrofon und Audio"
+    },
+    "clipboard": {
+      "name": "Zwischenablage",
+      "icon": "📋",
+      "description": "Zugriff auf alles, was Sie kopieren oder einfügen"
+    },
+    "contacts": {
+      "name": "Kontakte",
+      "icon": "👥",
+      "description": "Zugriff auf Ihre Kontakte und sozialen Verbindungen"
+    },
+    "notifications": {
+      "name": "Benachrichtigungen",
+      "icon": "🔔",
+      "description": "Berechtigung zum Senden von Benachrichtigungen"
+    }
+  },
+  "durationSlider": {
+    "label": "Tracking-Dauer",
+    "risk": "Risiko",
+    "days": "Tage",
+    "durations": {
+      "1": "1 Tag",
+      "7": "1 Woche",
+      "30": "1 Monat",
+      "90": "3 Monate",
+      "365": "1 Jahr"
+    },
+    "invasionLevels": {
+      "low": "Niedrig",
+      "moderate": "Moderat",
+      "high": "Hoch",
+      "veryHigh": "Sehr hoch",
+      "extreme": "Extrem"
+    }
+  },
+  "personaSelector": {
+    "label": "Wählen Sie ein Persona",
+    "personas": {
+      "anonymous": {
+        "name": "Anonym",
+        "type": "Allgemein"
+      },
+      "max": {
+        "name": "Max",
+        "type": "Student"
+      },
+      "sarah": {
+        "name": "Sarah",
+        "type": "Elternteil"
+      }
+    }
+  },
+  "profileCard": {
+    "title": "Datenprofil-Zusammenfassung",
+    "subtitle": "Nach",
+    "ofTracking": "Verfolgung",
+    "privacyRisk": "Datenschutzrisiko",
+    "scenarios": "Was sie mit diesen Daten tun könnten",
+    "protectionTitle": "So schützen Sie sich selbst"
+  },
+  "permissionConfigs": {
+    "location": {
+      "categoryTitle": "📍 Standort & Bewegung",
+      "baseItems": [
+        "Ihre genaue Heimat- und Arbeitsadresse",
+        "Tägliche Bewegungsmuster und Routinen",
+        "Häufigkeit von Besuchen an bestimmten Orten (Fitnessstudios, Cafés, Geschäfte)",
+        "Zeit, die an jedem Ort verbracht wird",
+        "Pendlermuster und Reiserouten",
+        "Orte, die Sie spät nachts oder häufig besuchen"
+      ],
+      "targetedMarketing": {
+        "title": "Gezielte Werbung",
+        "description": "Anzeigen für Dienstleistungen in der Nähe Ihrer erkannten Standorte (Restaurants in der Nähe des Fitnessstudios, Geschäfte in der Nähe des Hauses). Dies passiert bereits mit großen Apps."
+      },
+      "legalReality": {
+        "title": "Rechtliche Realität",
+        "description": "Standortverfolgung ist legal und weit verbreitet. Die meisten Apps geben dies in ihren Datenschutzrichtlinien an. Standortdaten werden jedoch häufig an Datenmakler verkauft und für Zwecke verwendet, die Sie nicht autorisiert haben."
+      }
+    },
+    "camera": {
+      "categoryTitle": "📹 Visuelle Informationen",
+      "baseItems": [
+        "Ihr physisches Erscheinungsbild und Gesichtszüge",
+        "Was Sie tragen und Modepräferenzen",
+        "Ihre Umgebung und Ihren Wohnraum",
+        "Objekte, mit denen Sie am meisten interagieren",
+        "Ihre emotionalen Ausdrücke und Reaktionen",
+        "Menschen um Sie herum und ihr Aussehen"
+      ],
+      "facialRecognition": {
+        "title": "Gesichtserkennung (Technische Realität)",
+        "description": "Technisch mit moderner KI möglich, aber die meisten Mainstream-Apps machen das noch nicht. Regierungen und Technologieunternehmen tun dies tatsächlich in großem Maßstab."
+      },
+      "legalReality": {
+        "title": "Rechtliche Realität",
+        "description": "Die Verwendung von Gesichtserkennung wird zunehmend reguliert. Die EU verbietet einige Einsätze, US-Bundesstaaten haben unterschiedliche Gesetze. Apps müssen offenlegen, wenn sie Gesichtserkennung verwenden. Lippenlesen wird noch nicht weit verbreitet eingesetzt, ist aber technisch machbar."
+      }
+    },
+    "microphone": {
+      "categoryTitle": "🎤 Audio & Unterhaltungen",
+      "baseItems": [
+        "Ihre Stimmeigenschaften und Akzent",
+        "Gespräche in Ihrer Nähe",
+        "Hintergrundlärm zeigt Ihre Umgebung",
+        "Emotionaler Ton und Stressniveaus in der Stimme",
+        "Sprachen, die Sie sprechen",
+        "Sprachassistenten-Befehle, die Sie verwenden"
+      ],
+      "conversationMonitoring": {
+        "title": "Gesprächsüberwachung (Technisch möglich)",
+        "description": "Mit Mikrofonzugriff können Apps Gespräche in Ihrer Nähe abhören und verstehen, worüber Sie sprechen. Dies könnte verwendet werden, um Ihre Interessen zu profilieren, Ihre Stimmung und Stressniveaus abzuleiten oder Sie basierend auf Gesprächsthemen mit relevanten Apps und Anzeigen anzusprechen. Technisch möglich, variiert aber je nach App-Absicht und -Fähigkeit."
+      },
+      "legalReality": {
+        "title": "Rechtliche Realität",
+        "description": "Das Aufzeichnen von Gesprächen ohne Zustimmung ist in vielen Ländern illegal (US-Bundesstaaten mit Zustimmung beider Parteien). Apps müssen Audioaufzeichnung offenlegen. Dies ist eine der umstrittensten Berechtigungen."
+      }
+    },
+    "clipboard": {
+      "categoryTitle": "📋 Vertrauliche Informationen",
+      "baseItems": [
+        "Passwörter und Authentifizierungscodes",
+        "Private Nachrichten und persönliche Kommunikation",
+        "Kontonummern für Finanzkonten",
+        "Ihr kopierte gesundheitsbezogene Informationen",
+        "Suchanfragen und Interessen",
+        "Adressen und Kontaktinformationen"
+      ],
+      "securityBreach": {
+        "title": "Sicherheitsverletzung (ist tatsächlich passiert)",
+        "description": "Das ist real. Über 100 beliebte Apps wurden beim Lesen von Zwischenablage-Daten erwischt. Viele weit verbreitete Social-Media- und Kommunikationsplattformen haben alles erfasst, was Benutzer kopieren und einfügen."
+      },
+      "legalReality": {
+        "title": "Rechtliche Realität & Änderungen",
+        "description": "Viele Geräte warnen Sie jetzt, wenn Apps auf die Zwischenablage zugreifen (Sie können die Warnung sehen). Apps müssen den Zwischenablage-Zugriff rechtfertigen. Dies führte dazu, dass viele Apps das Lesen der Zwischenablage eingestellt haben. Android folgt diesem Beispiel."
+      }
+    },
+    "contacts": {
+      "categoryTitle": "👥 Soziales Netzwerk & Beziehungen",
+      "baseItems": [
+        "Jeder in Ihrer Kontaktliste",
+        "Ableitung enger Beziehungen und Familie",
+        "Berufliche Kontakte und Geschäftsnetzwerk",
+        "Beziehungsstatus basierend auf Kontakthäufigkeit",
+        "Kontakt mit Fachleuten wie Ärzten, Anwälten, etc.",
+        "Netzwerkanalyse zur Identifizierung einflussreicher Menschen in Ihren Kreisen"
+      ],
+      "socialGraphAnalysis": {
+        "title": "Analyse des sozialen Graphen (weit verbreitet)",
+        "description": "Beliebte Social-Media- und Kommunikations-Apps verwenden das Hochladen von Kontakten, um soziale Graphen zu erstellen. Dies ist Standard für Empfehlungsalgorithmen."
+      },
+      "legalReality": {
+        "title": "Rechtliche Realität",
+        "description": "Das Hochladen von Kontakten ist größtenteils legal, wenn es offengelegt wird, wird aber zunehmend überprüft. GDPR erfordert ausdrückliche Zustimmung. Einige Apps laden Kontakte ohne klare Zustimmung hoch - dies hat zu Klagen geführt."
+      }
+    },
+    "notifications": {
+      "categoryTitle": "🔔 Aktivitätsverfolgung",
+      "baseItems": [
+        "Wenn und wie oft Sie Ihr Gerät verwenden",
+        "Tageszeiten, in denen Sie am aktivsten sind",
+        "Wann Sie bestimmte Apps überprüfen",
+        "Ihre Reaktionsmuster auf Warnungen",
+        "Aktive Stunden und Schlafplan",
+        "Engagement-Niveaus mit verschiedenen Inhalten"
+      ],
+      "behaviorAnalysis": {
+        "title": "Verhaltensanalyse (Standardpraxis)",
+        "description": "Alle großen Apps verfolgen das Engagement und optimieren den Timing von Push-Benachrichtigungen. Dies ist Standard für Engagement-Metriken und A/B-Tests."
+      },
+      "legalReality": {
+        "title": "Rechtliche Realität",
+        "description": "Die Berechtigung für Benachrichtigungen ist größtenteils rechtlich harmlos, ermöglicht aber Verhaltensmanipulation. GDPR und neuere Gesetze schränken ein, wie aggressiv Apps Benachrichtigungen verwenden können, um Verhalten zu beeinflussen."
+      }
+    }
+  },
+  "protectionTips": [
+    "Überprüfen Sie regelmäßig die App-Berechtigungen in den Telefoneinstellungen",
+    "Erteilen Sie Berechtigungen nur, wenn Sie das Feature tatsächlich verwenden",
+    "Lesen Sie Datenschutzrichtlinien vor der Installation von Apps",
+    "Verwenden Sie datenschutzfreundliche Alternativen für vertrauliche Apps",
+    "Leeren Sie regelmäßig den App-Cache und die Daten",
+    "Deaktivieren Sie Standortverfolgung, wenn Sie diese nicht benötigen",
+    "Decken Sie Ihre Kamera ab, wenn Sie diese nicht verwenden",
+    "Seien Sie vorsichtig bei Websites, die umfangreiche Berechtigungen anfordern",
+    "Vermeiden Sie das Kopieren vertraulicher Informationen wie Passwörter in Apps"
+  ],
+  "sourcesBreakdown": {
+    "label": "? Wie sie das wissen"
+  },
+  "sources": {
+    "max": {
+      "location": {
+        "gym": {
+          "insight": "Fitnessstudio-Besuche: Mo/Mi/Fr um 6 Uhr morgens",
+          "adResult": "Proteinpräparate und Fitness-Ausrüstung in der Nähe des Studios"
+        }
+      },
+      "microphone": {
+        "gaming": {
+          "insight": "Gespräche über Gaming-Turniere und Siege",
+          "adResult": "Gaming-Zubehör und E-Sports-Event-Anzeigen"
+        },
+        "fitness": {
+          "insight": "Fitness-Ziele und Fitnessstudio-Diskussion",
+          "adResult": "Premium-Trainings- und Ernährungsanzeigen"
+        }
+      },
+      "notifications": {
+        "morningGym": {
+          "insight": "Vorbereitung der Morgen-Trainingseinheit (5-6 Uhr Spitze)",
+          "adResult": "Pre-Workout-Anzeigen und Fitnessstudio-Angebote um 5 Uhr"
+        },
+        "lateNight": {
+          "insight": "Late-Night-Aktivitätsspitze: 22:00-2:00 Uhr",
+          "adResult": "Gaming-Deals um Mitternacht"
+        },
+        "morningGymNight": {
+          "insight": "Vorbereitung der Morgen-Trainingseinheit: 5-6 Uhr",
+          "adResult": "Fitnessmotivations-Anzeigen um 5 Uhr, Fitness-Angebote"
+        },
+        "downtown": {
+          "insight": "Innenstadt Samstagabends",
+          "adResult": "Social-Event- und Bar-Anzeigen am Freitagabend"
+        }
+      },
+      "camera": {
+        "athletic": {
+          "insight": "Athletischer Körperbau in Sportkleidung",
+          "adResult": "Fitness- und Sportmarken-Targeting"
+        },
+        "gaming": {
+          "insight": "Studentenzimmer mit Gaming-Setup",
+          "adResult": "Gaming-Hardware und Elektronik-Anzeigen"
+        }
+      },
+      "contacts": {
+        "friends": {
+          "insight": "Enge Freundesgruppe: 5-6 Schulfreunde",
+          "adResult": "Influencer-Identifikation in der Freundesgruppe"
+        },
+        "campus": {
+          "insight": "Campus-Kontakte: Klassenkameraden und Kollegen",
+          "adResult": "Social-Network-Kartierung für Targeting"
+        },
+        "locationExtra": {
+          "insight": "Trainings- und Bibliotheksmuster",
+          "adResult": "Social-Cluster-Kartierung nach Standort"
+        }
+      },
+      "clipboard": {
+        "gaming": {
+          "insight": "Gaming-Kontokennwörter und Login-Anmeldedaten",
+          "adResult": "Gaming-Kontoübernahme und Fraud-Targeting"
+        },
+        "email": {
+          "insight": "Uni-E-Mail und Campus-Portal-Zugang",
+          "adResult": "Diebstahl von Bildungsanmeldedaten-Targeting"
+        }
+      }
+    }
+  },
+  "items": {
+    "max": {
+      "location": {
+        "extraItems": [
+          "Fitnessstudio-Besuche: Mo/Mi/Fr um 6 Uhr morgens",
+          "Bibliothek-Lernstunden: täglich 10 Uhr bis 16 Uhr",
+          "Wochenend-Ausflüge in der Innenstadt: Samstagabends"
+        ]
+      },
+      "camera": {
+        "extraItems": [
+          "Athletischer Körperbau und beiläufiger Student Stil",
+          "Studentenzimmer mit Gaming-Setup und Fitnessausrüstung"
+        ]
+      },
+      "clipboard": {
+        "extraItems": [
+          "Gaming-Kontokennwörter und Anmeldedaten",
+          "Uni-E-Mail und Campus-Portal-Anmeldungen"
+        ]
+      },
+      "contacts": {
+        "extraItems": [
+          "Enge Freundesgruppe: 5-6 Schulfreunde",
+          "Campus-Kontakte: Klassenkameraden, Collegenhelfer"
+        ]
+      },
+      "notifications": {
+        "extraItems": [
+          "Spätnacht-Aktivität: 22 Uhr bis 2 Uhr Gaming-Sitzungen",
+          "Vorbereitung der Morgen-Trainingseinheit: 5-6 Uhr Aktivitätsspitze",
+          "Wochenend-Sozialengagement: hohe Benachrichtigungsreaktion Sa/So Abende"
+        ]
+      }
+    }
+  }
+}
