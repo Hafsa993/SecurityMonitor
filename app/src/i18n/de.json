@@ -57,11 +57,11 @@
       "365": "1 Jahr"
     },
     "invasionLevels": {
-      "low": "Niedrig",
-      "moderate": "Moderat",
-      "high": "Hoch",
-      "veryHigh": "Sehr hoch",
-      "extreme": "Extrem"
+      "low": "Niedriges",
+      "moderate": "Moderates",
+      "high": "Hohes",
+      "veryHigh": "Sehr hohes",
+      "extreme": "Extremes"
     }
   },
   "personaSelector": {

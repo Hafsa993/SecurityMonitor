@@ -16,6 +16,17 @@ export default function ProfileCard({ profile, permissions }) {
     }));
   };
 
+  const getInvasionLevelKey = (level) => {
+    const levelMap = {
+      'Low': 'low',
+      'Moderate': 'moderate',
+      'High': 'high',
+      'Very High': 'veryHigh',
+      'Extreme': 'extreme',
+    };
+    return levelMap[level] || level.toLowerCase();
+  };
+
   const getInvasionBadgeColor = (level) => {
     if (level === 'Low') return 'invasion-low';
     if (level === 'Moderate') return 'invasion-moderate';
@@ -42,7 +53,7 @@ export default function ProfileCard({ profile, permissions }) {
           </div>
           <div className="text-right">
             <div className={`text-4xl font-bold ${getInvasionDisplayColor(profile.invasionLevel)}`}>
-              {profile.invasionLevel}
+              {t(`durationSlider.invasionLevels.${getInvasionLevelKey(profile.invasionLevel)}`, profile.invasionLevel)}
             </div>
             <div className="text-sm opacity-75">{t('profileCard.privacyRisk', 'Privacy Risk')}</div>
           </div>
