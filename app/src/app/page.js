@@ -21,7 +21,7 @@ export default function Home() {
       <main className="min-h-screen p-6 md:p-12">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
+            <h1 className="text-5xl font-bold mb-4 title-gradient">
               {t('app.title', 'Privacy Tracker')}
             </h1>
             <p className="text-xl text-slate-300 mb-2">

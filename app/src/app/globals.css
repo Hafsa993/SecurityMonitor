@@ -68,7 +68,12 @@ body {
 
 /* Base Classes */
 .permission-toggle {
-  @apply flex items-center justify-between p-4 rounded-lg cursor-pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
   background-color: var(--color-bg-secondary);
   transition: var(--transition-base);
   border: 1px solid transparent;
@@ -85,13 +90,17 @@ body {
 }
 
 .slider-container {
-  @apply mt-6 p-4 rounded-lg;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
   background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
   transition: var(--transition-base);
 }
 
 .profile-card {
-  @apply p-6 rounded-lg shadow-lg;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
   transition: var(--transition-slow);
   box-shadow: 0 20px 25px -5px rgba(124, 92, 255, 0.1), 0 10px 10px -5px rgba(0, 217, 255, 0.05);
@@ -138,7 +147,8 @@ body {
 }
 
 .heading-accent {
-  @apply text-xl font-semibold;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: var(--color-text-accent);
 }
 
@@ -264,4 +274,12 @@ body {
 
 .border-divider {
   border-color: var(--color-border);
+}
+
+/* Title Styles */
+.title-gradient {
+  background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
