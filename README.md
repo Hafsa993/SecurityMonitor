@@ -2,6 +2,8 @@
 
 An interactive web app that shows what a website or app could learn about you from the permissions you grant, and how that picture grows the longer it tracks you.
 
+**Live demo:** https://hafsa993.github.io/SecurityMonitor/
+
 ![Privacy Tracker showing the profile for the Max persona](docs/screenshot.png)
 
 ## Features
@@ -45,6 +47,10 @@ docker compose up --build
 ```
 
 The app is served on http://localhost:3000.
+
+### Deployment
+
+Every push to `main` runs the tests and, if they pass, publishes a static export of the app to GitHub Pages ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 
 ## Project structure
 

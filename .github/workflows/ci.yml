@@ -1,9 +1,13 @@
-name: CI
+name: CI and deploy
 
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   test-and-build:
@@ -21,3 +25,40 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+
+  # Publish a static export to GitHub Pages after the tests pass on main
+  deploy:
+    needs: test-and-build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build static export
+        working-directory: app
+        run: npm ci && npm run build
+        env:
+          STATIC_EXPORT: 'true'
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/out
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

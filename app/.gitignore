@@ -16,3 +16,6 @@ docker-compose.override.yml
 # Environment files (keep only template)
 .env
 .env.*.local
+
+# Static export (GitHub Pages build)
+out
