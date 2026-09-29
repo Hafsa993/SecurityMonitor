@@ -115,10 +115,11 @@ describe('permissionConfigs - PERMISSION_CONFIGS', () => {
         config.scenarios.forEach((scenario) => {
           expect(scenario).toHaveProperty('icon')
           expect(scenario).toHaveProperty('title')
-          expect(scenario).toHaveProperty('description')
+          // The main scenario has a baseDescription that personas can replace
+          const description = scenario.description ?? scenario.baseDescription
           expect(typeof scenario.icon).toBe('string')
           expect(typeof scenario.title).toBe('string')
-          expect(typeof scenario.description).toBe('string')
+          expect(typeof description).toBe('string')
         })
       })
     })
@@ -228,7 +229,7 @@ describe('permissionConfigs - PERMISSION_CONFIGS', () => {
         config.scenarios.forEach((scenario) => {
           expect(scenario).toHaveProperty('icon')
           expect(scenario).toHaveProperty('title')
-          expect(scenario).toHaveProperty('description')
+          expect(scenario.description ?? scenario.baseDescription).toEqual(expect.any(String))
         })
       })
     })
@@ -313,14 +314,6 @@ describe('permissionConfigs - PERMISSION_CONFIGS', () => {
       })
     })
 
-    test('should not allow modification through normal assignment', () => {
-      const original = PERMISSION_CONFIGS.location.baseItems[0]
-
-      PERMISSION_CONFIGS.location.baseItems[0] = 'modified'
-
-      // Note: This test documents current behavior
-      // In production, consider Object.freeze for immutability
-    })
 
     test('should handle iteration over all permissions', () => {
       expect.assertions(6)
@@ -337,7 +330,7 @@ describe('permissionConfigs - PERMISSION_CONFIGS', () => {
         config.baseItems.forEach((item) => {
           // Check that items are descriptive (not just technical terms)
           expect(item.length).toBeGreaterThan(5)
-          expect(item.match(/[A-Z]/)).toBeTruthy() // Has capitals for readability
+          expect(item[0]).toBe(item[0].toUpperCase()) // Starts like a sentence
         })
       })
     })

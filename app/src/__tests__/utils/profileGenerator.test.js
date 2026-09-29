@@ -4,368 +4,156 @@
  */
 
 import { generateProfile } from '@/utils/profileGenerator'
-import { mockPermissions, mockPersonas, testCases } from '../fixtures/mockData'
-import { getComboWarning } from '@/utils/personaConfigs'
+import { PERMISSION_CONFIGS } from '@/utils/permissionConfigs'
+import { mockPermissions, mockPersonas } from '../fixtures/mockData'
+
+const ALL_PERMISSIONS = Object.values(mockPermissions)
 
 describe('profileGenerator - generateProfile', () => {
-  describe('valid inputs', () => {
-    test('should generate profile with single permission', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        7,
-        mockPersonas.max
-      )
-
-      expect(profile).toBeDefined()
-      expect(profile.duration).toBe(7)
-      expect(profile.invasionLevel).toBeDefined()
-      expect(Array.isArray(profile.categories)).toBe(true)
-      expect(Array.isArray(profile.scenarios)).toBe(true)
-    })
-
-    test('should generate profile with multiple permissions', () => {
-      const profile = generateProfile(
-        [mockPermissions.location, mockPermissions.camera],
-        14,
-        mockPersonas.sarah
-      )
-
-      expect(profile).toBeDefined()
-      expect(profile.duration).toBe(14)
-      expect(profile.categories.length).toBeGreaterThan(0)
-      expect(profile.scenarios.length).toBeGreaterThan(0)
-    })
-
-    test('should generate profile with all permissions', () => {
-      const allPermissions = Object.values(mockPermissions)
-      const profile = generateProfile(allPermissions, 30, mockPersonas.max)
-
-      expect(profile).toBeDefined()
-      expect(profile.categories.length).toBe(6)
-      expect(profile.invasionLevel).toBe('High')
-    })
-
-    test('should handle empty permissions array', () => {
-      const profile = generateProfile([], 7, mockPersonas.anonymous)
-
-      expect(profile).toBeDefined()
-      expect(profile.duration).toBe(7)
-      expect(profile.categories.length).toBe(0)
-      expect(profile.scenarios.length).toBe(0)
-    })
-  })
-
-  describe('invasion level calculation', () => {
-    test('should calculate Low invasion level for 1 day', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        1,
-        mockPersonas.max
-      )
-
-      expect(profile.invasionLevel).toBe('Low')
-    })
-
-    test('should calculate Moderate invasion level for 7 days', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        7,
-        mockPersonas.max
-      )
-
-      expect(profile.invasionLevel).toBe('Moderate')
-    })
-
-    test('should calculate High invasion level for 30 days', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        30,
-        mockPersonas.max
-      )
-
-      expect(profile.invasionLevel).toBe('High')
-    })
-
-    test('should calculate Very High invasion level for 90 days', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        90,
-        mockPersonas.max
-      )
-
-      expect(profile.invasionLevel).toBe('Very High')
-    })
-
-    test('should calculate Extreme invasion level for 365 days', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        365,
-        mockPersonas.max
-      )
-
-      expect(profile.invasionLevel).toBe('Extreme')
-    })
-  })
-
-  describe('combo warnings', () => {
-    test('should include combo warning for risky permission combinations', () => {
-      const profile = generateProfile(
-        [mockPermissions.location, mockPermissions.camera, mockPermissions.microphone],
-        7,
-        mockPersonas.max
-      )
-
-      expect(profile.comboWarning).toBeDefined()
-      expect(typeof profile.comboWarning).toBe('string')
-      expect(profile.comboWarning.length).toBeGreaterThan(0)
-    })
-
-    test('should not include combo warning for safe combinations', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        7,
-        mockPersonas.max
-      )
-
-      expect(profile.comboWarning).toBeDefined()
-    })
-
-    test('should match getComboWarning utility result', () => {
-      const permissions = [mockPermissions.location, mockPermissions.camera]
-      const profile = generateProfile(permissions, 7, mockPersonas.max)
-
-      if (permissions.length > 1) {
-        expect(profile.comboWarning).toBeDefined()
-      }
-    })
-  })
-
-  describe('duration text formatting', () => {
-    test('should format single day correctly', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        1,
-        mockPersonas.max
-      )
-
-      expect(profile.duration).toBe(1)
-    })
-
-    test('should format week duration correctly', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        7,
-        mockPersonas.max
-      )
-
-      expect(profile.duration).toBe(7)
-    })
-
-    test('should handle various duration values', () => {
-      ;[1, 7, 14, 30, 90, 180, 365].forEach((days) => {
-        const profile = generateProfile(
-          [mockPermissions.location],
-          days,
-          mockPersonas.max
-        )
-
-        expect(profile.duration).toBe(days)
-      })
-    })
-  })
-
   describe('output structure', () => {
-    test('should return object with all required properties', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        7,
-        mockPersonas.max
-      )
+    test('returns all profile fields', () => {
+      const profile = generateProfile([mockPermissions.location], 7, mockPersonas.max)
 
-      expect(profile).toHaveProperty('duration')
-      expect(profile).toHaveProperty('invasionLevel')
-      expect(profile).toHaveProperty('categories')
-      expect(profile).toHaveProperty('scenarios')
-      expect(profile).toHaveProperty('comboWarning')
-      expect(profile).toHaveProperty('protectionTips')
-    })
-
-    test('should return array for categories property', () => {
-      const profile = generateProfile(
-        [mockPermissions.location, mockPermissions.camera],
-        7,
-        mockPersonas.max
-      )
-
-      expect(Array.isArray(profile.categories)).toBe(true)
-      profile.categories.forEach((category) => {
-        expect(category).toHaveProperty('title')
-        expect(category).toHaveProperty('items')
-        expect(Array.isArray(category.items)).toBe(true)
+      expect(profile).toEqual({
+        duration: '1 week',
+        durationDays: 7,
+        invasionLevel: expect.any(String),
+        categories: expect.any(Array),
+        scenarios: expect.any(Array),
+        protectionTips: expect.any(Array),
+        personaId: 'max',
       })
     })
 
-    test('should return array for scenarios property', () => {
+    test('builds one category and two scenarios per enabled permission', () => {
+      const profile = generateProfile(ALL_PERMISSIONS, 7, mockPersonas.max)
+
+      expect(profile.categories.map((c) => c.permissionType)).toEqual([
+        'location',
+        'camera',
+        'microphone',
+        'clipboard',
+        'contacts',
+        'notifications',
+      ])
+      expect(profile.scenarios).toHaveLength(12)
+    })
+
+    test('uses a fixed category order regardless of input order', () => {
       const profile = generateProfile(
-        [mockPermissions.location],
+        [mockPermissions.notifications, mockPermissions.location],
         7,
         mockPersonas.max
       )
 
-      expect(Array.isArray(profile.scenarios)).toBe(true)
+      expect(profile.categories.map((c) => c.permissionType)).toEqual(['location', 'notifications'])
+    })
+
+    test('every scenario has an icon, a title and a description', () => {
+      const profile = generateProfile(ALL_PERMISSIONS, 7, mockPersonas.sarah)
+
       profile.scenarios.forEach((scenario) => {
-        expect(scenario).toHaveProperty('icon')
-        expect(scenario).toHaveProperty('title')
-        expect(scenario).toHaveProperty('description')
-      })
-    })
-
-    test('should return array for protectionTips property', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        7,
-        mockPersonas.max
-      )
-
-      expect(Array.isArray(profile.protectionTips)).toBe(true)
-      if (profile.protectionTips.length > 0) {
-        expect(typeof profile.protectionTips[0]).toBe('string')
-      }
-    })
-  })
-
-  describe('persona-specific behavior', () => {
-    test('should generate different profiles for different personas with same permissions', () => {
-      const permissionsList = [mockPermissions.location]
-      const duration = 7
-
-      const maxProfile = generateProfile(permissionsList, duration, mockPersonas.max)
-      const sarahProfile = generateProfile(permissionsList, duration, mockPersonas.sarah)
-
-      // Both should have same structure
-      expect(maxProfile).toHaveProperty('duration')
-      expect(sarahProfile).toHaveProperty('duration')
-
-      // Content may differ due to persona customizations
-      expect(maxProfile.categories).toBeDefined()
-      expect(sarahProfile.categories).toBeDefined()
-    })
-
-    test('should handle anonymous persona', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        7,
-        mockPersonas.anonymous
-      )
-
-      expect(profile).toBeDefined()
-      expect(profile.invasionLevel).toBeDefined()
-    })
-
-    test('should work with all persona types', () => {
-      const permissionsList = [mockPermissions.location]
-      const duration = 7
-
-      Object.values(mockPersonas).forEach((persona) => {
-        const profile = generateProfile(permissionsList, duration, persona)
-
-        expect(profile).toBeDefined()
-        expect(profile.invasionLevel).toBeDefined()
-        expect(Array.isArray(profile.categories)).toBe(true)
+        expect(scenario.icon).toEqual(expect.any(String))
+        expect(scenario.title).toEqual(expect.any(String))
+        expect(scenario.description).toEqual(expect.any(String))
       })
     })
   })
 
-  describe('edge cases', () => {
-    test('should handle null enabled permissions gracefully', () => {
-      // This tests defensive programming
-      expect(() => {
-        generateProfile(undefined || [], 7, mockPersonas.max)
-      }).not.toThrow()
-    })
+  describe('empty selection', () => {
+    test('returns no categories and a single data aggregation scenario', () => {
+      const profile = generateProfile([], 7, mockPersonas.max)
 
-    test('should handle minimum valid duration', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        1,
-        mockPersonas.max
-      )
-
-      expect(profile).toBeDefined()
-      expect(profile.duration).toBe(1)
-    })
-
-    test('should handle maximum realistic duration', () => {
-      const profile = generateProfile(
-        [mockPermissions.location],
-        365,
-        mockPersonas.max
-      )
-
-      expect(profile).toBeDefined()
-      expect(profile.duration).toBe(365)
-    })
-
-    test('should maintain consistency across multiple calls', () => {
-      const permissions = [mockPermissions.location, mockPermissions.camera]
-      const duration = 7
-      const persona = mockPersonas.max
-
-      const profile1 = generateProfile(permissions, duration, persona)
-      const profile2 = generateProfile(permissions, duration, persona)
-
-      expect(profile1.invasionLevel).toBe(profile2.invasionLevel)
-      expect(profile1.categories.length).toBe(profile2.categories.length)
-      expect(profile1.scenarios.length).toBe(profile2.scenarios.length)
+      expect(profile.categories).toEqual([])
+      expect(profile.scenarios).toEqual([
+        expect.objectContaining({ title: 'Data Aggregation' }),
+      ])
     })
   })
 
-  describe('integration with other modules', () => {
-    test('should use permission builders for each enabled permission', () => {
-      const permissions = [mockPermissions.location, mockPermissions.camera]
-      const profile = generateProfile(permissions, 7, mockPersonas.max)
+  describe('invasion level', () => {
+    // Score = number of enabled permissions × days
+    test.each([
+      [1, 1, 'Low'],
+      [1, 7, 'Low'],
+      [1, 8, 'Moderate'],
+      [1, 30, 'Moderate'],
+      [1, 90, 'High'],
+      [2, 90, 'Very High'],
+      [1, 365, 'Extreme'],
+      [6, 30, 'Very High'],
+      [6, 31, 'Extreme'],
+    ])('%i permission(s) for %i day(s) is %s', (count, days, expected) => {
+      const profile = generateProfile(ALL_PERMISSIONS.slice(0, count), days, mockPersonas.max)
 
-      expect(profile.categories.length).toBeGreaterThanOrEqual(permissions.length)
+      expect(profile.invasionLevel).toBe(expected)
+    })
+  })
+
+  describe('duration', () => {
+    test.each([
+      [1, '1 day'],
+      [7, '1 week'],
+      [30, '1 month'],
+      [90, '3 months'],
+      [365, '1 year'],
+      [14, '14 days'],
+    ])('%i days is shown as "%s"', (days, text) => {
+      const profile = generateProfile([mockPermissions.location], days, mockPersonas.max)
+
+      expect(profile.duration).toBe(text)
+      expect(profile.durationDays).toBe(days)
+    })
+  })
+
+  describe('personas', () => {
+    test('uses persona-specific content when a known persona is selected', () => {
+      const generic = generateProfile([mockPermissions.location], 7, null)
+      const max = generateProfile([mockPermissions.location], 7, mockPersonas.max)
+      const sarah = generateProfile([mockPermissions.location], 7, mockPersonas.sarah)
+
+      expect(max.scenarios[0].description).not.toBe(generic.scenarios[0].description)
+      expect(sarah.scenarios[0].description).not.toBe(max.scenarios[0].description)
     })
 
-    test('should respect permission order in output', () => {
-      const permissions = [
-        mockPermissions.location,
-        mockPermissions.camera,
-        mockPermissions.microphone,
-      ]
-      const profile = generateProfile(permissions, 7, mockPersonas.max)
+    test('falls back to generic content for a persona without config', () => {
+      const profile = generateProfile([mockPermissions.location], 7, mockPersonas.anonymous)
 
-      expect(profile.categories.length).toBeGreaterThan(0)
-      expect(profile.scenarios.length).toBeGreaterThan(0)
+      expect(profile.personaId).toBe('anonymous')
+      expect(profile.categories[0].items).toEqual(PERMISSION_CONFIGS.location.baseItems)
+    })
+
+    test('reports a null personaId when no persona is selected', () => {
+      expect(generateProfile([mockPermissions.camera], 7).personaId).toBeNull()
+    })
+  })
+
+  describe('protection tips', () => {
+    test('adds the clipboard tip only when clipboard is enabled', () => {
+      const tip = 'Avoid copying sensitive information like passwords into apps'
+
+      expect(generateProfile([mockPermissions.location], 7).protectionTips).not.toContain(tip)
+      expect(generateProfile([mockPermissions.clipboard], 7).protectionTips).toContain(tip)
     })
   })
 
   describe('data integrity', () => {
-    test('should not mutate input arrays', () => {
+    test('does not mutate the input array', () => {
       const permissions = [mockPermissions.location]
-      const permissionsCopy = [...permissions]
+      const copy = [...permissions]
 
       generateProfile(permissions, 7, mockPersonas.max)
 
-      expect(permissions).toEqual(permissionsCopy)
+      expect(permissions).toEqual(copy)
     })
 
-    test('should provide independent result objects', () => {
-      const profile1 = generateProfile(
-        [mockPermissions.location],
-        7,
-        mockPersonas.max
-      )
-      const profile2 = generateProfile(
-        [mockPermissions.location],
-        7,
-        mockPersonas.max
-      )
+    test('returns independent results', () => {
+      const first = generateProfile([mockPermissions.location], 7, mockPersonas.max)
+      const second = generateProfile([mockPermissions.location], 7, mockPersonas.max)
 
-      profile1.categories[0].items[0] = 'modified'
+      first.categories[0].items[0] = 'modified'
 
-      expect(profile2.categories[0].items[0]).not.toBe('modified')
+      expect(second.categories[0].items[0]).not.toBe('modified')
     })
   })
 })

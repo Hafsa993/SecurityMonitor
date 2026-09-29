@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '../fixtures/renderWithLanguage'
 import PermissionToggle from '@/components/PermissionToggle'
 import { mockPermissions } from '../fixtures/mockData'
 
@@ -99,7 +99,7 @@ describe('PermissionToggle Component', () => {
       )
 
       const checkbox = screen.getByRole('checkbox')
-      fireEvent.change(checkbox)
+      fireEvent.click(checkbox)
 
       expect(onChange).toHaveBeenCalledTimes(1)
     })
@@ -116,7 +116,7 @@ describe('PermissionToggle Component', () => {
       )
 
       const checkbox = screen.getByRole('checkbox')
-      fireEvent.change(checkbox, { target: { checked: true } })
+      fireEvent.click(checkbox)
 
       expect(onChange).toHaveBeenCalled()
     })
@@ -133,7 +133,7 @@ describe('PermissionToggle Component', () => {
       )
 
       const checkbox = screen.getByRole('checkbox')
-      fireEvent.change(checkbox, { target: { checked: false } })
+      fireEvent.click(checkbox)
 
       expect(onChange).toHaveBeenCalled()
     })
@@ -193,7 +193,7 @@ describe('PermissionToggle Component', () => {
       )
 
       const checkboxes = screen.getAllByRole('checkbox')
-      fireEvent.change(checkboxes[0])
+      fireEvent.click(checkboxes[0])
 
       expect(onChange1).toHaveBeenCalled()
       expect(onChange2).not.toHaveBeenCalled()

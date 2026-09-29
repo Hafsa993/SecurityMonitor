@@ -11,279 +11,123 @@ import {
   buildContactsSection,
   buildNotificationsSection,
 } from '@/utils/permissionBuilder'
-import { mockPersonas } from '../fixtures/mockData'
+import { PERMISSION_CONFIGS } from '@/utils/permissionConfigs'
+import { PERSONA_CONFIGS } from '@/utils/personaConfigs'
 
-describe('permissionBuilder - individual builders', () => {
-  describe('buildLocationSection', () => {
-    test('should return location category with items', () => {
-      const result = buildLocationSection(true, 'max')
+const hasNone = () => false
+const hasOnly = (...ids) => (id) => ids.includes(id)
 
-      expect(result).toHaveProperty('category')
-      expect(result).toHaveProperty('scenarios')
-      expect(result.category).toHaveProperty('title')
-      expect(result.category).toHaveProperty('items')
+// Uniform call signature: location, contacts and notifications also take hasPermission
+const builders = {
+  location: (personaId, has = hasNone) => buildLocationSection(has, personaId),
+  camera: (personaId) => buildCameraSection(personaId),
+  microphone: (personaId) => buildMicrophoneSection(personaId),
+  clipboard: (personaId) => buildClipboardSection(personaId),
+  contacts: (personaId, has = hasNone) => buildContactsSection(has, personaId),
+  notifications: (personaId, has = hasNone) => buildNotificationsSection(has, personaId),
+}
+
+describe('permissionBuilder', () => {
+  describe.each(Object.keys(builders))('%s section', (type) => {
+    const build = builders[type]
+    const config = PERMISSION_CONFIGS[type]
+
+    test('returns a category built from the shared config', () => {
+      const { category } = build(null)
+
+      expect(category.title).toBe(config.categoryTitle)
+      expect(category.titleKey).toBe(config.categoryTitleKey)
+      expect(category.permissionType).toBe(type)
+      expect(category.baseItemsLength).toBe(config.baseItems.length)
+      expect(category.items).toEqual(config.baseItems)
     })
 
-    test('should include location-specific items', () => {
-      const result = buildLocationSection(true, 'max')
+    test('returns the main scenario followed by the legal reality scenario', () => {
+      const { scenarios } = build(null)
 
-      expect(result.category.title).toContain('Location')
-      expect(Array.isArray(result.category.items)).toBe(true)
-      expect(result.category.items.length).toBeGreaterThan(0)
+      expect(scenarios).toHaveLength(2)
+      expect(scenarios[0].permissionType).toBe(type)
+      expect(scenarios[0].title).toBe(config.scenarios[0].title)
+      expect(scenarios[1]).toBe(config.scenarios[1])
     })
 
-    test('should return scenarios for location', () => {
-      const result = buildLocationSection(true, 'max')
+    test('without a persona, uses the generic description and keeps its translation key', () => {
+      const [main] = build(null).scenarios
 
-      expect(Array.isArray(result.scenarios)).toBe(true)
-      expect(result.scenarios.length).toBeGreaterThan(0)
+      expect(main.description).toBe(config.scenarios[0].baseDescription)
+      expect(main.descriptionKey).toBe(config.scenarios[0].descriptionKey)
+      expect(main.sources).toHaveLength(1)
     })
 
-    test('should handle different personas', () => {
-      const maxResult = buildLocationSection(true, 'max')
-      const sarahResult = buildLocationSection(true, 'sarah')
-
-      expect(maxResult).toBeDefined()
-      expect(sarahResult).toBeDefined()
-      expect(maxResult.category.title).toBe(sarahResult.category.title)
+    test('treats an unknown persona like no persona', () => {
+      expect(build('unknown')).toEqual(build(null))
     })
 
-    test('should handle permission disabled state', () => {
-      const result = buildLocationSection(false, 'max')
+    test('does not mutate the shared config', () => {
+      const before = JSON.stringify(config)
+      build('max').category.items.push('extra')
+      build('sarah')
 
-      expect(result).toBeDefined()
-    })
-  })
-
-  describe('buildCameraSection', () => {
-    test('should return camera category with items', () => {
-      const result = buildCameraSection(true, 'max')
-
-      expect(result).toHaveProperty('category')
-      expect(result).toHaveProperty('scenarios')
-      expect(result.category.title).toContain('Camera')
-    })
-
-    test('should include camera-specific items', () => {
-      const result = buildCameraSection(true, 'sarah')
-
-      expect(result.category.items.length).toBeGreaterThan(0)
-      expect(typeof result.category.items[0]).toBe('string')
-    })
-
-    test('should return scenarios for camera', () => {
-      const result = buildCameraSection(true, 'max')
-
-      expect(Array.isArray(result.scenarios)).toBe(true)
-      expect(result.scenarios.length).toBeGreaterThan(0)
-    })
-
-    test('should handle permission disabled state', () => {
-      const result = buildCameraSection(false, 'max')
-
-      expect(result).toBeDefined()
+      expect(JSON.stringify(config)).toBe(before)
     })
   })
 
-  describe('buildMicrophoneSection', () => {
-    test('should return microphone category with items', () => {
-      const result = buildMicrophoneSection(true, 'max')
+  describe.each(['max', 'sarah'])('persona %s', (personaId) => {
+    const persona = PERSONA_CONFIGS[personaId]
 
-      expect(result).toHaveProperty('category')
-      expect(result).toHaveProperty('scenarios')
-      expect(result.category.title).toContain('Microphone')
-    })
+    test.each(['location', 'camera', 'clipboard', 'contacts', 'notifications'])(
+      '%s uses the persona description instead of the generic translation',
+      (type) => {
+        const [main] = builders[type](personaId).scenarios
 
-    test('should include microphone-specific items', () => {
-      const result = buildMicrophoneSection(true, 'sarah')
-
-      expect(result.category.items.length).toBeGreaterThan(0)
-      expect(typeof result.category.items[0]).toBe('string')
-    })
-
-    test('should return scenarios for microphone', () => {
-      const result = buildMicrophoneSection(true, 'max')
-
-      expect(Array.isArray(result.scenarios)).toBe(true)
-    })
-
-    test('should handle permission disabled state', () => {
-      const result = buildMicrophoneSection(false, 'max')
-
-      expect(result).toBeDefined()
-    })
-  })
-
-  describe('buildClipboardSection', () => {
-    test('should return clipboard category with items', () => {
-      const result = buildClipboardSection(true, 'max')
-
-      expect(result).toHaveProperty('category')
-      expect(result).toHaveProperty('scenarios')
-      expect(result.category.title).toContain('Clipboard')
-    })
-
-    test('should include clipboard-specific items', () => {
-      const result = buildClipboardSection(true, 'sarah')
-
-      expect(result.category.items.length).toBeGreaterThan(0)
-    })
-
-    test('should return scenarios for clipboard', () => {
-      const result = buildClipboardSection(true, 'max')
-
-      expect(Array.isArray(result.scenarios)).toBe(true)
-      expect(result.scenarios.length).toBeGreaterThan(0)
-    })
-
-    test('should handle permission disabled state', () => {
-      const result = buildClipboardSection(false, 'max')
-
-      expect(result).toBeDefined()
-    })
-  })
-
-  describe('buildContactsSection', () => {
-    test('should return contacts category with items', () => {
-      const result = buildContactsSection(true, 'max')
-
-      expect(result).toHaveProperty('category')
-      expect(result).toHaveProperty('scenarios')
-      expect(result.category.title).toContain('Contacts')
-    })
-
-    test('should include contacts-specific items', () => {
-      const result = buildContactsSection(true, 'sarah')
-
-      expect(result.category.items.length).toBeGreaterThan(0)
-    })
-
-    test('should return scenarios for contacts', () => {
-      const result = buildContactsSection(true, 'max')
-
-      expect(Array.isArray(result.scenarios)).toBe(true)
-    })
-
-    test('should handle permission disabled state', () => {
-      const result = buildContactsSection(false, 'max')
-
-      expect(result).toBeDefined()
-    })
-  })
-
-  describe('buildNotificationsSection', () => {
-    test('should return notifications category with items', () => {
-      const result = buildNotificationsSection(true, 'max')
-
-      expect(result).toHaveProperty('category')
-      expect(result).toHaveProperty('scenarios')
-      expect(result.category.title).toContain('Notifications')
-    })
-
-    test('should include notification-specific items', () => {
-      const result = buildNotificationsSection(true, 'sarah')
-
-      expect(result.category.items.length).toBeGreaterThan(0)
-    })
-
-    test('should return scenarios for notifications', () => {
-      const result = buildNotificationsSection(true, 'max')
-
-      expect(Array.isArray(result.scenarios)).toBe(true)
-    })
-
-    test('should handle permission disabled state', () => {
-      const result = buildNotificationsSection(false, 'max')
-
-      expect(result).toBeDefined()
-    })
-  })
-
-  describe('builder consistency', () => {
-    const builders = [
-      buildLocationSection,
-      buildCameraSection,
-      buildMicrophoneSection,
-      buildClipboardSection,
-      buildContactsSection,
-      buildNotificationsSection,
-    ]
-
-    test('all builders should return consistent structure', () => {
-      builders.forEach((builder) => {
-        const result = builder(true, 'max')
-
-        expect(result).toHaveProperty('category')
-        expect(result).toHaveProperty('scenarios')
-        expect(result.category).toHaveProperty('title')
-        expect(result.category).toHaveProperty('items')
-        expect(Array.isArray(result.category.items)).toBe(true)
-        expect(Array.isArray(result.scenarios)).toBe(true)
-      })
-    })
-
-    test('all builders should handle all personas', () => {
-      const personas = ['anonymous', 'max', 'sarah']
-
-      builders.forEach((builder) => {
-        personas.forEach((persona) => {
-          expect(() => {
-            builder(true, persona)
-          }).not.toThrow()
-        })
-      })
-    })
-
-    test('all builders should return non-empty arrays', () => {
-      builders.forEach((builder) => {
-        const result = builder(true, 'max')
-
-        expect(result.category.items.length).toBeGreaterThan(0)
-        expect(result.scenarios.length).toBeGreaterThan(0)
-      })
-    })
-  })
-
-  describe('data independence', () => {
-    test('should not mutate shared permission configs', () => {
-      const result1 = buildLocationSection(true, 'max')
-      const result2 = buildLocationSection(true, 'sarah')
-
-      result1.category.items[0] = 'modified'
-
-      expect(result2.category.items[0]).not.toBe('modified')
-    })
-
-    test('should return independent scenario objects', () => {
-      const result1 = buildLocationSection(true, 'max')
-      const result2 = buildLocationSection(true, 'max')
-
-      if (result1.scenarios.length > 0) {
-        result1.scenarios[0].title = 'modified'
-        expect(result2.scenarios[0].title).not.toBe('modified')
+        expect(main.description).toBe(persona[type].description)
+        expect(main).not.toHaveProperty('descriptionKey')
+        expect(main.permissionType).toBe(type)
       }
-    })
-  })
+    )
 
-  describe('edge cases and validation', () => {
-    test('should handle invalid persona gracefully', () => {
-      const result = buildLocationSection(true, 'unknown')
+    test('location appends persona items after the base items', () => {
+      const { category } = builders.location(personaId)
 
-      expect(result).toBeDefined()
-      expect(result.category).toBeDefined()
-    })
-
-    test('should handle boolean permission state correctly', () => {
-      ;[true, false].forEach((state) => {
-        const result = buildLocationSection(state, 'max')
-        expect(result).toBeDefined()
-      })
+      expect(category.items).toEqual([
+        ...PERMISSION_CONFIGS.location.baseItems,
+        ...persona.location.extraItems,
+      ])
     })
 
-    test('should handle null/undefined permission state', () => {
-      const result = buildLocationSection(undefined || false, 'max')
+    test('location adds microphone and notification sources only when those are enabled', () => {
+      const base = builders.location(personaId).scenarios[0].sources
+      const combined = builders.location(personaId, hasOnly('microphone', 'notifications')).scenarios[0].sources
 
-      expect(result).toBeDefined()
+      expect(base).toEqual(persona.location.baseSources)
+      expect(combined).toEqual([
+        ...persona.location.baseSources,
+        ...persona.location.microphone,
+        ...persona.location.notifications,
+      ])
+    })
+
+    test('contacts adds the location source only when location is enabled', () => {
+      const without = builders.contacts(personaId).scenarios[0].sources
+      const withLocation = builders.contacts(personaId, hasOnly('location')).scenarios[0].sources
+
+      expect(without).toEqual(persona.contacts.sources)
+      expect(withLocation).toEqual([...persona.contacts.sources, persona.contacts.locationExtra])
+    })
+
+    test('notifications adds the location source only when location is enabled', () => {
+      const without = builders.notifications(personaId).scenarios[0].sources
+      const withLocation = builders.notifications(personaId, hasOnly('location')).scenarios[0].sources
+
+      expect(without).toEqual(persona.notifications.sources)
+      expect(withLocation).toEqual([...persona.notifications.sources, persona.notifications.locationExtra])
+    })
+
+    test('microphone has no persona-specific text and falls back to the generic scenario', () => {
+      const [main] = builders.microphone(personaId).scenarios
+
+      expect(main.description).toBe(PERMISSION_CONFIGS.microphone.scenarios[0].baseDescription)
+      expect(main.descriptionKey).toBe(PERMISSION_CONFIGS.microphone.scenarios[0].descriptionKey)
     })
   })
 })

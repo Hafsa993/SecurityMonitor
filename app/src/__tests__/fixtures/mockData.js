@@ -115,7 +115,6 @@ export const mockProfile = {
       ],
     },
   ],
-  comboWarning: 'The combination of Location and Camera access creates significant privacy risks',
   protectionTips: [
     'Deny location access unless absolutely necessary',
     'Only grant camera access to trusted applications',

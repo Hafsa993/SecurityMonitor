@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '../fixtures/renderWithLanguage'
 import PersonaSelector from '@/components/PersonaSelector'
 import { PERSONAS } from '@/utils/personas'
 

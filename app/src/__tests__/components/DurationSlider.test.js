@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '../fixtures/renderWithLanguage'
 import DurationSlider from '@/components/DurationSlider'
 
 describe('DurationSlider Component', () => {
@@ -33,7 +33,7 @@ describe('DurationSlider Component', () => {
     test('should display current duration label', () => {
       render(<DurationSlider value={7} onChange={jest.fn()} />)
 
-      expect(screen.getByText('1 week')).toBeInTheDocument()
+      expect(screen.getByRole('slider')).toHaveAttribute('aria-valuetext', '1 week')
     })
 
     test('should display risk level indicator', () => {
@@ -45,11 +45,11 @@ describe('DurationSlider Component', () => {
     test('should render quick select buttons', () => {
       render(<DurationSlider {...defaultProps} />)
 
-      expect(screen.getByText('1 day')).toBeInTheDocument()
-      expect(screen.getByText('1 week')).toBeInTheDocument()
-      expect(screen.getByText('1 month')).toBeInTheDocument()
-      expect(screen.getByText('3 months')).toBeInTheDocument()
-      expect(screen.getByText('1 year')).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: '1 day' })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: '1 week' })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: '1 month' })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: '3 months' })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: '1 year' })).toBeInTheDocument()
     })
   })
 
@@ -57,31 +57,31 @@ describe('DurationSlider Component', () => {
     test('should show correct label for 1 day', () => {
       render(<DurationSlider value={1} onChange={jest.fn()} />)
 
-      expect(screen.getByText('1 day')).toBeInTheDocument()
+      expect(screen.getByRole('slider')).toHaveAttribute('aria-valuetext', '1 day')
     })
 
     test('should show correct label for 7 days', () => {
       render(<DurationSlider value={7} onChange={jest.fn()} />)
 
-      expect(screen.getByText('1 week')).toBeInTheDocument()
+      expect(screen.getByRole('slider')).toHaveAttribute('aria-valuetext', '1 week')
     })
 
     test('should show correct label for 30 days', () => {
       render(<DurationSlider value={30} onChange={jest.fn()} />)
 
-      expect(screen.getByText('1 month')).toBeInTheDocument()
+      expect(screen.getByRole('slider')).toHaveAttribute('aria-valuetext', '1 month')
     })
 
     test('should show correct label for 90 days', () => {
       render(<DurationSlider value={90} onChange={jest.fn()} />)
 
-      expect(screen.getByText('3 months')).toBeInTheDocument()
+      expect(screen.getByRole('slider')).toHaveAttribute('aria-valuetext', '3 months')
     })
 
     test('should show correct label for 365 days', () => {
       render(<DurationSlider value={365} onChange={jest.fn()} />)
 
-      expect(screen.getByText('1 year')).toBeInTheDocument()
+      expect(screen.getByRole('slider')).toHaveAttribute('aria-valuetext', '1 year')
     })
 
     test('should show numeric label for in-between values', () => {
@@ -250,11 +250,11 @@ describe('DurationSlider Component', () => {
         <DurationSlider value={7} onChange={jest.fn()} />
       )
 
-      expect(screen.getByText('1 week')).toBeInTheDocument()
+      expect(screen.getByRole('slider')).toHaveAttribute('aria-valuetext', '1 week')
 
       rerender(<DurationSlider value={30} onChange={jest.fn()} />)
 
-      expect(screen.getByText('1 month')).toBeInTheDocument()
+      expect(screen.getByRole('slider')).toHaveAttribute('aria-valuetext', '1 month')
     })
 
     test('should update risk level when value changes', () => {
@@ -313,8 +313,10 @@ describe('DurationSlider Component', () => {
     test('should display range bounds', () => {
       render(<DurationSlider value={7} onChange={jest.fn()} />)
 
-      expect(screen.getByText('1 day')).toBeInTheDocument()
-      expect(screen.getByText('365 days')).toBeInTheDocument()
+      const bounds = screen.getByRole('slider').parentElement.lastElementChild
+
+      expect(bounds).toHaveTextContent('1 day')
+      expect(bounds).toHaveTextContent('1 year')
     })
   })
 
@@ -322,13 +324,13 @@ describe('DurationSlider Component', () => {
     test('should handle very small values', () => {
       render(<DurationSlider value={1} onChange={jest.fn()} />)
 
-      expect(screen.getByText('1 day')).toBeInTheDocument()
+      expect(screen.getByRole('slider')).toHaveAttribute('aria-valuetext', '1 day')
     })
 
     test('should handle very large values', () => {
       render(<DurationSlider value={365} onChange={jest.fn()} />)
 
-      expect(screen.getByText('1 year')).toBeInTheDocument()
+      expect(screen.getByRole('slider')).toHaveAttribute('aria-valuetext', '1 year')
     })
 
     test('should handle rapid value changes', () => {

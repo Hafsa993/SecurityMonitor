@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '../fixtures/renderWithLanguage'
 import ProfileCard from '@/components/ProfileCard'
 import { mockProfile, mockPermissions } from '../fixtures/mockData'
 
@@ -187,53 +187,8 @@ describe('ProfileCard Component', () => {
       render(<ProfileCard {...defaultProps} />)
 
       // Initially all should be collapsed with right arrows
-      expect(screen.getByText(/▶/)).toBeInTheDocument()
-    })
-  })
-
-  describe('combo warning', () => {
-    test('should display combo warning when present', () => {
-      render(<ProfileCard {...defaultProps} />)
-
-      if (mockProfile.comboWarning) {
-        expect(screen.getByText(mockProfile.comboWarning)).toBeInTheDocument()
-      }
-    })
-
-    test('should display warning icon', () => {
-      render(<ProfileCard {...defaultProps} />)
-
-      if (mockProfile.comboWarning) {
-        expect(screen.getByText(/⚠️/)).toBeInTheDocument()
-      }
-    })
-
-    test('should display "Permission Combination Risk" heading', () => {
-      render(<ProfileCard {...defaultProps} />)
-
-      if (mockProfile.comboWarning) {
-        expect(screen.getByText(/Permission Combination Risk/)).toBeInTheDocument()
-      }
-    })
-
-    test('should not display warning when comboWarning is null', () => {
-      const noWarningProfile = {
-        ...mockProfile,
-        comboWarning: null,
-      }
-
-      const { container } = render(
-        <ProfileCard
-          profile={noWarningProfile}
-          permissions={defaultProps.permissions}
-        />
-      )
-
-      const warningBox = container.querySelector('[class*="warning"]')
-
-      if (noWarningProfile.comboWarning) {
-        expect(warningBox).toBeInTheDocument()
-      }
+      expect(screen.getAllByText(/▶/).length).toBeGreaterThan(0)
+      expect(screen.queryByText(/▼/)).not.toBeInTheDocument()
     })
   })
 

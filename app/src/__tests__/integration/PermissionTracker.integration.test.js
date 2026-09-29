@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '../fixtures/renderWithLanguage'
 import PermissionTracker from '@/components/PermissionTracker'
 import { PERSONAS } from '@/utils/personas'
 
@@ -104,7 +104,7 @@ describe('PermissionTracker - Integration Tests', () => {
     test('should render permission tracker', () => {
       render(<PermissionTracker />)
 
-      expect(screen.getByText('Permissions')).toBeInTheDocument()
+      expect(screen.getByText(/^Permissions \(\d\/6\)$/)).toBeInTheDocument()
     })
 
     test('should display all permission toggles', () => {
@@ -141,7 +141,7 @@ describe('PermissionTracker - Integration Tests', () => {
 
       expect(locationCheckbox.checked).toBe(false)
 
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
 
       expect(locationCheckbox.checked).toBe(true)
     })
@@ -152,8 +152,8 @@ describe('PermissionTracker - Integration Tests', () => {
       const locationCheckbox = screen.getByTestId('permission-location')
       const cameraCheckbox = screen.getByTestId('permission-camera')
 
-      fireEvent.change(locationCheckbox)
-      fireEvent.change(cameraCheckbox)
+      fireEvent.click(locationCheckbox)
+      fireEvent.click(cameraCheckbox)
 
       expect(locationCheckbox.checked).toBe(true)
       expect(cameraCheckbox.checked).toBe(true)
@@ -165,8 +165,8 @@ describe('PermissionTracker - Integration Tests', () => {
       const locationCheckbox = screen.getByTestId('permission-location')
       const cameraCheckbox = screen.getByTestId('permission-camera')
 
-      fireEvent.change(locationCheckbox)
-      fireEvent.change(cameraCheckbox)
+      fireEvent.click(locationCheckbox)
+      fireEvent.click(cameraCheckbox)
 
       expect(screen.getByText(/Permissions \(2\/6\)/)).toBeInTheDocument()
     })
@@ -194,10 +194,10 @@ describe('PermissionTracker - Integration Tests', () => {
 
       const locationCheckbox = screen.getByTestId('permission-location')
 
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
       expect(locationCheckbox.checked).toBe(true)
 
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
       expect(locationCheckbox.checked).toBe(false)
     })
   })
@@ -284,7 +284,7 @@ describe('PermissionTracker - Integration Tests', () => {
 
       const locationCheckbox = screen.getByTestId('permission-location')
 
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
 
       expect(screen.getByTestId('profile-card')).toBeInTheDocument()
     })
@@ -294,13 +294,13 @@ describe('PermissionTracker - Integration Tests', () => {
 
       const locationCheckbox = screen.getByTestId('permission-location')
 
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
 
       expect(screen.getByTestId('profile-card')).toBeInTheDocument()
 
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
 
-      expect(screen.queryByTestId('profile-card')).not.toBeInTheDocument()
+      expect(screen.getByText('No Permissions Enabled')).toBeInTheDocument()
     })
 
     test('should update profile when duration changes', () => {
@@ -308,7 +308,7 @@ describe('PermissionTracker - Integration Tests', () => {
 
       const locationCheckbox = screen.getByTestId('permission-location')
 
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
 
       const profileBefore = screen.getByTestId('profile-card')
       expect(profileBefore).toBeInTheDocument()
@@ -325,7 +325,7 @@ describe('PermissionTracker - Integration Tests', () => {
 
       const locationCheckbox = screen.getByTestId('permission-location')
 
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
 
       const maxButton = screen.getByTestId('persona-max')
 
@@ -341,7 +341,7 @@ describe('PermissionTracker - Integration Tests', () => {
 
       const locationCheckbox = screen.getByTestId('permission-location')
 
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
 
       expect(localStorageMock.setItem).toHaveBeenCalled()
     })
@@ -366,7 +366,7 @@ describe('PermissionTracker - Integration Tests', () => {
 
       const locationCheckbox = screen.getByTestId('permission-location')
 
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
 
       expect(localStorageMock.setItem).toHaveBeenCalled()
 
@@ -406,8 +406,8 @@ describe('PermissionTracker - Integration Tests', () => {
       const cameraCheckbox = screen.getByTestId('permission-camera')
       const maxButton = screen.getByTestId('persona-max')
 
-      fireEvent.change(locationCheckbox)
-      fireEvent.change(cameraCheckbox)
+      fireEvent.click(locationCheckbox)
+      fireEvent.click(cameraCheckbox)
       fireEvent.click(maxButton)
 
       expect(locationCheckbox.checked).toBe(true)
@@ -422,7 +422,7 @@ describe('PermissionTracker - Integration Tests', () => {
       const locationCheckbox = screen.getByTestId('permission-location')
       const slider = screen.getByTestId('duration-slider')
 
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
       fireEvent.change(slider, { target: { value: '365' } })
 
       expect(locationCheckbox.checked).toBe(true)
@@ -435,9 +435,9 @@ describe('PermissionTracker - Integration Tests', () => {
 
       const locationCheckbox = screen.getByTestId('permission-location')
 
-      fireEvent.change(locationCheckbox)
-      fireEvent.change(locationCheckbox)
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
+      fireEvent.click(locationCheckbox)
+      fireEvent.click(locationCheckbox)
 
       expect(locationCheckbox.checked).toBe(true)
     })
@@ -456,7 +456,7 @@ describe('PermissionTracker - Integration Tests', () => {
 
       checkboxes.forEach((id) => {
         const checkbox = screen.getByTestId(`permission-${id}`)
-        fireEvent.change(checkbox)
+        fireEvent.click(checkbox)
       })
 
       expect(screen.getByText(/Permissions \(6\/6\)/)).toBeInTheDocument()
@@ -478,13 +478,13 @@ describe('PermissionTracker - Integration Tests', () => {
       // Enable all
       checkboxes.forEach((id) => {
         const checkbox = screen.getByTestId(`permission-${id}`)
-        fireEvent.change(checkbox)
+        fireEvent.click(checkbox)
       })
 
       // Disable all
       checkboxes.forEach((id) => {
         const checkbox = screen.getByTestId(`permission-${id}`)
-        fireEvent.change(checkbox)
+        fireEvent.click(checkbox)
       })
 
       expect(screen.getByText(/Permissions \(0\/6\)/)).toBeInTheDocument()
@@ -500,7 +500,7 @@ describe('PermissionTracker - Integration Tests', () => {
       render(<PermissionTracker />)
 
       // Should still render with default state
-      expect(screen.getByText('Permissions')).toBeInTheDocument()
+      expect(screen.getByText(/^Permissions \(\d\/6\)$/)).toBeInTheDocument()
 
       localStorageMock.getItem = originalGetItem
     })
@@ -512,11 +512,11 @@ describe('PermissionTracker - Integration Tests', () => {
       const slider = screen.getByTestId('duration-slider')
 
       for (let i = 0; i < 10; i++) {
-        fireEvent.change(locationCheckbox)
+        fireEvent.click(locationCheckbox)
         fireEvent.change(slider, { target: { value: String(Math.random() * 365) } })
       }
 
-      expect(screen.getByText('Permissions')).toBeInTheDocument()
+      expect(screen.getByText(/^Permissions \(\d\/6\)$/)).toBeInTheDocument()
     })
   })
 
@@ -526,14 +526,14 @@ describe('PermissionTracker - Integration Tests', () => {
 
       // 1. Enable location
       const locationCheckbox = screen.getByTestId('permission-location')
-      fireEvent.change(locationCheckbox)
+      fireEvent.click(locationCheckbox)
 
       // 2. Should show profile
       expect(screen.getByTestId('profile-card')).toBeInTheDocument()
 
       // 3. Enable camera
       const cameraCheckbox = screen.getByTestId('permission-camera')
-      fireEvent.change(cameraCheckbox)
+      fireEvent.click(cameraCheckbox)
 
       // 4. Change to max persona
       const maxButton = screen.getByTestId('persona-max')
