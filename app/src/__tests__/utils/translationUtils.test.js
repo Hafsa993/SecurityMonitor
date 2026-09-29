@@ -94,6 +94,15 @@ describe('Translation System - Utilities', () => {
       expect(enKeys).toEqual(deKeys)
     })
 
+    test('should have exactly the same keys at every level in English and German', () => {
+      const flatKeys = (obj, prefix = '') =>
+        Object.entries(obj).flatMap(([key, value]) =>
+          value && typeof value === 'object' ? flatKeys(value, `${prefix}${key}.`) : [`${prefix}${key}`]
+        )
+
+      expect(flatKeys(de).sort()).toEqual(flatKeys(en).sort())
+    })
+
     test('should have matching permission keys in English and German', () => {
       const permissions = Object.keys(en.permissions).sort()
       const dePermissions = Object.keys(de.permissions).sort()
