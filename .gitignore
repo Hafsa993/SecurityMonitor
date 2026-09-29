@@ -1,0 +1,13 @@
+# Dependencies and build output (the app lives in app/, see app/.gitignore)
+node_modules/
+.next/
+coverage/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local tooling
+.claude/

@@ -1,100 +1,71 @@
 # Privacy Tracker
 
-An interactive web app to visualize what websites and apps can know about you based on permissions and tracking duration.
+An interactive web app that shows what a website or app could learn about you from the permissions you grant, and how that picture grows the longer it tracks you.
 
-## Project Overview
-
-Privacy Tracker is an educational tool that helps users understand the implications of granting permissions to websites and applications. Users can:
-
-- Toggle different types of permissions (Location, Camera, Microphone, Clipboard, Contacts, Notifications)
-- Adjust the tracking duration from 1 day to 1 year
-- See real-time visualization of what a website could infer about them
-- Understand privacy risks and get protection tips
+![Privacy Tracker showing the profile for the Max persona](docs/screenshot.png)
 
 ## Features
 
-- **Interactive Permission Controls**: Toggle permissions on/off to see immediate changes
-- **Duration Slider**: Experiment with different time periods to understand how data accumulates
-- **Real-time Profile Generation**: Dynamic display of what can be inferred from enabled permissions
-- **Risk Assessment**: Invasion level indicator showing privacy risk
-- **Permission Combinations**: Warnings when dangerous permission combinations are enabled
-- **Protection Recommendations**: Actionable privacy protection tips
+- **Permission toggles:** location, camera, microphone, clipboard, contacts and notifications
+- **Tracking duration** from 1 day to 1 year, with a combined privacy risk level
+- **Personas:** see the profile of a generic user, Max (college student) or Sarah (parent), each with realistic inferences and example ads
+- **"How they know this"** breakdowns linking each inference to the permissions that reveal it, including combinations (e.g. location + microphone)
+- **Legal context and protection tips** for each permission
+- **English and German**, switchable at any time; the language and your selections are remembered in the browser
 
-## Tech Stack
+Everything runs in the browser. No data leaves your device.
 
-- **Frontend**: Next.js 14, React 18, Tailwind CSS
-- **Language**: JavaScript
-- **Storage**: LocalStorage for state persistence
+## Tech stack
 
-## Getting Started
+Next.js 16 (App Router) · React 18 · Tailwind CSS · Jest + Testing Library
 
-### Prerequisites
+## Getting started
 
-- Node.js 18+ 
-- npm or yarn
-
-### Installation
-
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-## Project Structure
-
-```
-/src
-  /app
-    - layout.js       # Root layout
-    - page.js         # Home page
-    - globals.css     # Global styles
-  /components
-    - PermissionTracker.js    # Main tracker component
-    - PermissionToggle.js     # Individual permission toggle
-    - DurationSlider.js       # Tracking duration slider
-    - ProfileCard.js          # Data profile display
-  /utils
-    - profileGenerator.js     # Core logic for generating profiles
-```
-
-## How It Works
-
-1. User toggles permissions on/off
-2. User adjusts the duration slider to simulate tracking over different time periods
-3. Profile generator analyzes enabled permissions and duration
-4. Real-time display shows:
-   - What data can be collected
-   - Inferences about the user
-   - Possible misuse scenarios
-   - Risk level assessment
-   - Protection recommendations
-
-## Building
-
-To build for production:
+Requires Node.js 20.9 or newer.
 
 ```bash
-npm run build
-npm start
+cd app
+npm install
+npm run dev
 ```
 
-## Future Enhancements
+Then open http://localhost:3000.
 
-- Compare multiple permission scenarios
-- Share profiles via URL
-- Export privacy reports
-- Real app permission analysis
-- Multi-language support
-- Mobile app version
+| Command (in `app/`) | Description |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run build` / `npm start` | Production build and server |
+| `npm test` | Run the test suite |
+| `npm run test:coverage` | Run tests with a coverage report |
 
-## Purpose
+### Docker
 
-This project aims to educate users about digital privacy and the hidden implications of permission requests. It's designed to be eye-opening and help people make more informed decisions about what permissions to grant.
+```bash
+docker compose up --build
+```
+
+The app is served on http://localhost:3000.
+
+## Project structure
+
+```
+app/src/
+├── app/            # Next.js layout, page and global styles
+├── components/     # PermissionTracker, ProfileCard, DurationSlider, PersonaSelector, ...
+├── context/        # LanguageContext (translation function + language state)
+├── i18n/           # en.json, de.json
+├── utils/          # Profile generation: configs, persona data, section builders
+└── __tests__/      # Unit, component and integration tests
+```
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how the profile is built, how translations work and how to add personas or permissions.
+
+## Ideas for the future
+
+- Compare two permission scenarios side by side
+- Share a scenario via URL
+- More personas and languages
+
+## License
+
+[MIT](LICENSE)
