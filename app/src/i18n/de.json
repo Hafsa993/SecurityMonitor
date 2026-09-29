@@ -427,5 +427,11 @@
         ]
       }
     }
+  },
+  "profileGenerator": {
+    "dataAggregation": {
+      "title": "Datenaggregation",
+      "description": "Bereits bekannte Daten werden zu einem umfassenden Profil zur Monetarisierung kombiniert"
+    }
   }
 }

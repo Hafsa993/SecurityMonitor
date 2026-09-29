@@ -427,5 +427,11 @@
         ]
       }
     }
+  },
+  "profileGenerator": {
+    "dataAggregation": {
+      "title": "Data Aggregation",
+      "description": "Combine previously known data for a comprehensive profile for monetization"
+    }
   }
 }

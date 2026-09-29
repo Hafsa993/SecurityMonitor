@@ -50,6 +50,8 @@ export default function DurationSlider({ value, onChange }) {
             min="1"
             max="365"
             value={value}
+            aria-label={t('durationSlider.label', 'Tracking Duration')}
+            aria-valuetext={getDurationLabel(value)}
             onChange={(e) => onChange(Number(e.target.value))}
             className="w-full h-2 rounded-lg appearance-none cursor-pointer"
             style={{

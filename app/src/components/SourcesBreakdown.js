@@ -17,7 +17,7 @@ export default function SourcesBreakdown({ sources }) {
       'Clipboard': 'permissions.clipboard.name',
       'Contacts': 'permissions.contacts.name',
       'Audio': 'permissions.microphone.name',
-      'Activity': 'durationSlider.label',
+      'Activity': 'permissions.notifications.name',
       'Notifications': 'permissions.notifications.name',
     };
     return t(permissionMap[name] || '', name);

@@ -139,6 +139,8 @@ export const PERSONA_CONFIGS = {
       items: ['Gaming account passwords and credentials', 'College email and campus portal logins'],
       description:
         'They capture: gaming account passwords, college email logins, dating app credentials, payment info for in-game purchases.',
+      descriptionDe:
+        'Sie erfassen: Passwörter für Gaming-Konten, Uni-E-Mail-Logins, Zugangsdaten für Dating-Apps und Zahlungsdaten für In-Game-Käufe.',
       sources: [
         {
           permissionEmoji: '📋',
@@ -158,19 +160,14 @@ export const PERSONA_CONFIGS = {
         },
       ],
     },
-    comboWarnings: {
-      locationContacts:
-        '💡 Location + Contacts = They know which friends you hangout with where. Can map your social circle location patterns.',
-      cameraMicrophone:
-        '💡 Camera + Microphone = They see and hear your gaming, study sessions, and social hangouts simultaneously.',
-      all: '💡 Location + Camera + Microphone = Complete surveillance of your college life: where you are, who you see, what you say.',
-    },
   },
   sarah: {
     location: {
       extraItems: ['School drop-off/pickup: 8am and 3pm daily', 'Office commute: 9am-5pm weekdays', 'Grocery and shopping routine: Weekly pattern'],
       description:
         'Ads for kids clothing stores near school, family restaurants, grocery deals on your shopping route, kids activities venues, suburban stores.',
+      descriptionDe:
+        'Anzeigen für Kinderbekleidungsgeschäfte in der Nähe der Schule, Familienrestaurants, Lebensmittelangebote auf Ihrer Einkaufsroute, Freizeitangebote für Kinder und Geschäfte in der Vorstadt.',
       baseSources: [
         {
           permissionEmoji: '📍',
@@ -214,6 +211,8 @@ export const PERSONA_CONFIGS = {
       items: ['Professional work appearance and casual home attire', 'Family home with kids present in background'],
       description:
         'They can see professional you at work and family you with kids. Your home background reveals family status, kids ages, and lifestyle.',
+      descriptionDe:
+        'Sie sehen Sie beruflich bei der Arbeit und privat mit Ihren Kindern. Ihr Zuhause im Hintergrund verrät Familienstand, das Alter Ihrer Kinder und Ihren Lebensstil.',
       sources: [
         {
           permissionEmoji: '📹',
@@ -237,6 +236,8 @@ export const PERSONA_CONFIGS = {
       items: ['Family: spouse, kids, extended family', 'Professional network: work colleagues, manager', 'Parent network: school contacts, other parents'],
       description:
         'They identify you as parent, infer family size and ages, map your professional network, and identify parent community connections.',
+      descriptionDe:
+        'Sie erkennen Sie als Elternteil, leiten Familiengrösse und Alter ab, kartografieren Ihr berufliches Netzwerk und identifizieren Ihre Kontakte in der Elterngemeinschaft.',
       sources: [
         {
           permissionEmoji: '👥',
@@ -272,6 +273,8 @@ export const PERSONA_CONFIGS = {
       ],
       description:
         'They know your morning rush, work unavailability, evening family time. Target kid activities at school pickup time, work stress relief at 5pm, family deals at dinnertime.',
+      descriptionDe:
+        'Sie kennen Ihre morgendliche Hektik, Ihre Nichterreichbarkeit während der Arbeit und Ihre Familienzeit am Abend. Kinderaktivitäten zur Abholzeit an der Schule, Stressabbau-Angebote um 17 Uhr, Familienangebote zur Abendessenszeit.',
       sources: [
         {
           permissionEmoji: '🔔',
@@ -303,6 +306,8 @@ export const PERSONA_CONFIGS = {
       items: ['Kids school login information', 'Family budget notes and account numbers'],
       description:
         'They capture: kids school logins, family calendar info, budget spreadsheets, medical appointment notes, kids app passwords.',
+      descriptionDe:
+        'Sie erfassen: Schul-Logins Ihrer Kinder, Einträge aus dem Familienkalender, Budget-Tabellen, Notizen zu Arztterminen und Passwörter für Kinder-Apps.',
       sources: [
         {
           permissionEmoji: '📋',
@@ -322,27 +327,12 @@ export const PERSONA_CONFIGS = {
         },
       ],
     },
-    comboWarnings: {
-      locationContacts:
-        '💡 Location + Contacts = They know you pick up kids at school, work commute with spouse. Tracks entire family movement.',
-      cameraMicrophone: '💡 Camera + Microphone = They see and hear family dynamics: how you interact with kids, conversations, reactions.',
-      all: '💡 Location + Camera + Microphone = Complete family surveillance: tracking kids locations, seeing family moments, hearing conversations.',
-    },
   },
 };
 
 // Helper function to merge base data with persona customizations
 export function getPersonaData(personaId) {
   return PERSONA_CONFIGS[personaId] || null;
-}
-
-// Helper function to get combo warning
-export function getComboWarning(personaId, type) {
-  const personaData = getPersonaData(personaId);
-  if (personaData?.comboWarnings?.[type]) {
-    return personaData.comboWarnings[type];
-  }
-  return null;
 }
 
 // Helper function to get translated persona description

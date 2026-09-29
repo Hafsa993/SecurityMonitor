@@ -3,6 +3,17 @@ import { getPersonaData } from './personaConfigs.js';
 
 // Option 3: Component-based approach - utility functions for building permission sections
 
+// Main scenario of a section. When a persona replaces the generic description, the
+// generic translation key is dropped so it can't override the persona text
+// (ProfileCard translates persona descriptions via getPersonaDescription).
+function primaryScenario(config, permissionType, description, sources) {
+  const scenario = { ...config.scenarios[0], permissionType, description, sources };
+  if (description !== config.scenarios[0].baseDescription) {
+    delete scenario.descriptionKey;
+  }
+  return scenario;
+}
+
 export function buildLocationSection(hasPermission, personaId) {
   const config = PERMISSION_CONFIGS.location;
   const items = [...config.baseItems];
@@ -43,7 +54,7 @@ export function buildLocationSection(hasPermission, personaId) {
       items 
     },
     scenarios: [
-      { ...config.scenarios[0], description, sources },
+      primaryScenario(config, 'location', description, sources),
       config.scenarios[1], // Legal Reality
     ],
   };
@@ -82,7 +93,7 @@ export function buildCameraSection(personaId) {
       items 
     },
     scenarios: [
-      { ...config.scenarios[0], permissionType: 'camera', description, sources },
+      primaryScenario(config, 'camera', description, sources),
       config.scenarios[1], // Legal Reality
     ],
   };
@@ -121,7 +132,7 @@ export function buildClipboardSection(personaId) {
       items 
     },
     scenarios: [
-      { ...config.scenarios[0], permissionType: 'clipboard', description, sources },
+      primaryScenario(config, 'clipboard', description, sources),
       config.scenarios[1], // Legal Reality & Changes
     ],
   };
@@ -164,7 +175,7 @@ export function buildMicrophoneSection(personaId) {
       items 
     },
     scenarios: [
-      { ...config.scenarios[0], permissionType: 'microphone', description, sources },
+      primaryScenario(config, 'microphone', description, sources),
       config.scenarios[1], // Legal Reality
     ],
   };
@@ -207,7 +218,7 @@ export function buildContactsSection(hasPermission, personaId) {
       items 
     },
     scenarios: [
-      { ...config.scenarios[0], permissionType: 'contacts', description, sources },
+      primaryScenario(config, 'contacts', description, sources),
       config.scenarios[1], // Legal Reality
     ],
   };
@@ -250,7 +261,7 @@ export function buildNotificationsSection(hasPermission, personaId) {
       items 
     },
     scenarios: [
-      { ...config.scenarios[0], permissionType: 'notifications', description, sources },
+      primaryScenario(config, 'notifications', description, sources),
       config.scenarios[1], // Legal Reality
     ],
   };

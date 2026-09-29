@@ -22,6 +22,7 @@ export default function PermissionTracker() {
   const [duration, setDuration] = useState(7); // days
   const [selectedPersona, setSelectedPersona] = useState('anonymous');
   const [profile, setProfile] = useState(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   // Define PERMISSIONS with translations
   const PERMISSIONS = [
@@ -65,19 +66,18 @@ export default function PermissionTracker() {
 
   // Initialize permissions and persona from localStorage
   useEffect(() => {
-    const savedState = localStorage.getItem('permissionTrackerState');
-    if (savedState) {
-      const { permissions: savedPermissions, duration: savedDuration, selectedPersona: savedPersona } = JSON.parse(savedState);
-      setPermissions(savedPermissions);
-      setDuration(savedDuration);
-      if (savedPersona) setSelectedPersona(savedPersona);
-    } else {
-      const initialPermissions = {};
-      PERMISSIONS.forEach((p) => {
-        initialPermissions[p.id] = false;
-      });
-      setPermissions(initialPermissions);
+    try {
+      const savedState = JSON.parse(localStorage.getItem('permissionTrackerState'));
+      if (savedState) {
+        // Merge over the defaults so state saved by an older version can't leave a toggle undefined
+        setPermissions((prev) => ({ ...prev, ...savedState.permissions }));
+        if (typeof savedState.duration === 'number') setDuration(savedState.duration);
+        if (savedState.selectedPersona) setSelectedPersona(savedState.selectedPersona);
+      }
+    } catch {
+      // Unreadable saved state: keep the defaults
     }
+    setHasLoaded(true);
   }, []);
 
   // Update profile when permissions, duration, or persona changes
@@ -90,12 +90,13 @@ export default function PermissionTracker() {
     const newProfile = generateProfile(enabledPermissions, duration, currentPersona);
     setProfile(newProfile);
 
-    // Save state to localStorage
+    // Don't save before the saved state has been loaded, or the defaults would overwrite it
+    if (!hasLoaded) return;
     localStorage.setItem(
       'permissionTrackerState',
       JSON.stringify({ permissions, duration, selectedPersona })
     );
-  }, [permissions, duration, selectedPersona]);
+  }, [permissions, duration, selectedPersona, hasLoaded]);
 
   const togglePermission = (id) => {
     setPermissions((prev) => ({

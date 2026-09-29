@@ -6,7 +6,6 @@ import {
   buildContactsSection,
   buildNotificationsSection,
 } from './permissionBuilder.js';
-import { getComboWarning } from './personaConfigs.js';
 
 // Utility functions
 const getDurationText = (days) => {
@@ -30,7 +29,6 @@ const getInvasionLevel = (count, days) => {
 export function generateProfile(enabledPermissions, duration, persona = null) {
   const categories = [];
   const scenarios = [];
-  let comboWarning = null;
 
   const hasPermission = (id) => enabledPermissions.some((p) => p?.id === id);
   const personaId = persona?.id || null;
@@ -95,16 +93,18 @@ export function generateProfile(enabledPermissions, duration, persona = null) {
     scenarios.push({
       icon: '📊',
       title: 'Data Aggregation',
+      titleKey: 'profileGenerator.dataAggregation.title',
       description: 'Combine previously known data for a comprehensive profile for monetization',
+      descriptionKey: 'profileGenerator.dataAggregation.description',
     });
   }
 
   return {
     duration: getDurationText(duration),
+    durationDays: duration,
     invasionLevel,
     categories,
     scenarios,
-    comboWarning,
     protectionTips: protectionTips,
     personaId, // Add persona ID for translation lookups
   };
