@@ -4,11 +4,12 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Copy all app files (src, public, config, package.json, etc.)
-COPY app/ .
+# Install dependencies from the lockfile first so this layer is cached
+COPY app/package.json app/package-lock.json ./
+RUN npm ci
 
-# Install all dependencies (including dev deps needed for Next.js build)
-RUN npm install
+# Copy the rest of the app (src, public, config)
+COPY app/ .
 
 # Build Next.js application
 RUN npm run build

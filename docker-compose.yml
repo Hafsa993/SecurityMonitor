@@ -16,8 +16,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-    volumes:
-      - /app/node_modules  # Don't mount node_modules from host
     deploy:
       resources:
         limits:
@@ -26,10 +24,3 @@ services:
         reservations:
           cpus: '0.5'
           memory: 256M
-    # Optional: Use for development with hot reload
-    # environment:
-    #   - NODE_ENV=development
-    # command: npm run dev
-    # volumes:
-    #   - ./app/src:/app/src
-    #   - ./app/public:/app/public
