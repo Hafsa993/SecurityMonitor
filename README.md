@@ -1,5 +1,7 @@
 # Privacy Tracker
 
+[![CI](https://github.com/Hafsa993/SecurityMonitor/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Hafsa993/SecurityMonitor/actions/workflows/ci.yml)
+
 An interactive web app that shows what a website or app could learn about you from the permissions you grant, and how that picture grows the longer it tracks you.
 
 **Live demo:** https://hafsa993.github.io/SecurityMonitor/
